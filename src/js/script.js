@@ -1,15 +1,18 @@
 require('formdata-polyfill');
 	import 'nodelist-foreach-polyfill';
-	//import design from './parts/design';
+	import design from './parts/design';
 	
 	import slider from './parts/slider';
+	import consultation from './parts/consultation';
 	
 	window.addEventListener('DOMContentLoaded', function(){
 		'use strict';
-		//design();
+		
 		
 		
 		slider();
+		design();
+		consultation();
 		
 		
 		

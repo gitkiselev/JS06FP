@@ -4,6 +4,24 @@
 	<meta charset=UTF-8>
 	<meta name=viewport content="width=device-width, initial-scale=1">
 	<title>Картины.art - портрет на холсте</title>
+	<link rel=stylesheet href="css/animate.css">
+	<link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+	<link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+	<meta name="theme-color" content="#ffffff">
 </head>
 <body>
 	<img class="fixed-gift wow pulse infinite" src=img/gift.png alt>
@@ -94,11 +112,11 @@
 			<div class=row>
 				<div class=col-md-7>
 					<div class=main-slider>
-						<div class=main-slider-item>
-							<img src=img/main-1.png alt>
+						<div class="main-slider-item active">
+							<img src="img/main-1.png" alt>
 						</div>
-						<div class=main-slider-item>
-							<img src=img/main-2.png alt>
+						<div class="main-slider-item">
+							<img src="img/main-2.png" alt>
 						</div>
 					</div>
 				</div>
@@ -236,23 +254,23 @@
 							<input type=file name=upload>
 						</div>
 						<select id=size>
-							<option >Выберите размер картины</option>
-							<option >40x50</option>
-							<option >50x70</option>
-							<option >70x70</option>
-							<option >70x100</option>
+							<option>Выберите размер картины</option>
+							<option value="100">40x50</option>
+							<option value="1000">50x70</option>
+							<option value="10000">70x70</option>
+							<option value="100000">70x100</option>
 						</select>
 						<select id=material>
-							<option >Выберите материал картины</option>
-							<option   title="Изящный, позволяет легко создавать текстуру, подходит для декоративных картин маслом.">Холст из волокна</option>
-							<option   title="Достаточно грубый и создает ощущение реальности, подходит для классических пейзажей, натюрмортов и портретов.">Льняной холст</option>
-							<option  title="Изящный, подходит для всех типов реалистичных портретов.">Холст из натурального хлопка</option>
+							<option>Выберите материал картины</option>
+							<option value="2000" title="Изящный, позволяет легко создавать текстуру, подходит для декоративных картин маслом.">Холст из волокна</option>
+							<option value="3000" title="Достаточно грубый и создает ощущение реальности, подходит для классических пейзажей, натюрмортов и портретов.">Льняной холст</option>
+							<option value="5000" title="Изящный, подходит для всех типов реалистичных портретов.">Холст из натурального хлопка</option>
 						</select>
 						<select id=options>
-							<option >Дополнительные услуги</option>
-							<option >Покрытие арт-гелем</option>
-							<option >Экспресс-изготовление</option>
-							<option >Доставка готовых работ </option>
+							<option value ="0">Дополнительные услуги</option>
+							<option value="1000">Покрытие арт-гелем</option>
+							<option value="10000">Экспресс-изготовление</option>
+							<option value="50000">Доставка готовых работ </option>
 						</select>
 						<input type="text" class="promocode" placeholder="Введите ваш промокод">
 						<div class=calc-price>Для расчета нужно выбрать размер картины и материал картины</div>
@@ -498,7 +516,7 @@
 				<button class="main-slider-btn main-next-btn">
 					<img src="img/right-arr.png">
 				</button>
-				<div class=feedback-slider-item>
+				<div class="feedback-slider-item animated slideInLeftOutRight">
 					<div class=col-sm-5>
 						<div class=feedback-block>
 							<img src=img/feedback-1.png alt>
@@ -511,7 +529,7 @@
 						<p class=feedback-signature><span>Олег Петров,</span> д. Месягутово</p>
 					</div>
 				</div>
-				<div class=feedback-slider-item>
+				<div class="feedback-slider-item animated slideInLeftOutRight">
 					<div class=col-sm-5>
 						<div class=feedback-block>
 							<img src=img/feedback-2.jpg alt>
@@ -524,7 +542,7 @@
 						<p class=feedback-signature><span>Ирина Антонова,</span> г. Кисловодск</p>
 					</div>
 				</div>
-				<div class=feedback-slider-item>
+				<div class="feedback-slider-item animated slideInLeftOutRight">
 					<div class=col-sm-5>
 						<div class=feedback-block>
 							<img src=img/feedback-3.jpg alt>
@@ -593,7 +611,7 @@
 			<p class=p-heading>Остались вопросы?</p>
 			<h2>Получите консультацию художника!</h2>
 			<div class="col-md-10 col-md-offset-1">
-				<form action=mailer/smart.php method=POST>
+				<form  action="method=POST">
 					<div class=input-wrapper>
 						<input type=text name=name placeholder="Ваше имя" required>
 						<input type=text name=phone placeholder="Ваш телефон" required>
@@ -662,7 +680,7 @@
 				<button class=popup-close>&times;</button>
 				<h4>Остались вопросы? Закажите обратный звонок</h4>
 				<div class=main-form>
-					<form class=form action=mailer/smart.php method=POST>
+					<form class=form  action="method=POST">
 						<input type=text name=name placeholder="Ваше имя" required>
 						<input type=text name=phone placeholder="Ваш телефон" required>
 						<button class="button button-order" onclick="yaCounter46630539.reachGoal('btn-consultation'); return true;">Получить консультацию</button>
@@ -681,11 +699,11 @@
 			</div>
 		</div>
 	</div>
-	<div class=popup-design>
+	<div class=popup-design >
 		<div class=popup-dialog>
-			<div class=popup-content>
+			<div class=popup-content id="contentDF">
 				<button class=popup-close>&times;</button>
-				<form action= method=POST enctype=multipart/form-data>
+				<form name ="design-form" id="myform" action="method=POST" enctype="multipart/form-data">
 					<h4>Заказать дизайн портрета</h4>
 					<div class=file_uploa>
 						<button type=button>Загрузить фотографию</button>
@@ -694,10 +712,10 @@
 					</div>
 					<div class=main-form>
 						<div class=form>
-							<input type=text name=name placeholder="Ваше имя" required>
-							<input type=text name=phone placeholder="Ваш телефон" required>
-							<input type=text name=email placeholder="Ваш e-mail">
-							<textarea name=message placeholder=Комментарий rows=2></textarea>
+							<input id="nameDF" type=text name=name placeholder="Ваше имя" required>
+							<input class="phoneDF" value="+7(___)___-____" type=text name=phone placeholder="Ваш телефон" required>
+							<input id="emailDF" class="emailDF" type=text name=email placeholder="Ваш e-mail">
+							<textarea id ="commentDF" name=message placeholder=Комментарий rows=2></textarea>
 							<button class="button button-order">Отправить дизайнеру</button>
 						</div>
 					</div>
@@ -705,10 +723,29 @@
 			</div>
 		</div>
 	</div>
+	<div class="popup-ok">
+		<div class=popup-dialog>
+			<div class="popup-content">
+				<button class=popup-close>&times;</button>
+				Спасибо! Скоро мы с вами свяжемся
+			</div>
+			
+		</div>
+	</div>
+	<div class="popup-error">
+		<div class=popup-dialog>
+			<div class="popup-content">
+				<button class=popup-close>&times;</button>
+				Ошибка отправки данных
+			</div>
+		</div>
+	</div>
 
-	<link rel=stylesheet href=css/bootstrap.css>
-	<link rel=stylesheet href=css/main.css>
+	<link rel=stylesheet href="css/bootstrap.css">
+	<link rel=stylesheet href="css/main.css">
 	<link rel=stylesheet href="css/animate.css">
+	
 	<script src="../dist/js/bundle.js"></script>
+	
 </body>
 </html>

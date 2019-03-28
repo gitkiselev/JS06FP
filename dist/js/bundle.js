@@ -165,6 +165,323 @@ module.exports = g;
 
 /***/ }),
 
+/***/ "./src/js/parts/consultation.js":
+/*!**************************************!*\
+  !*** ./src/js/parts/consultation.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function consultation() {
+  console.log('consultation');
+  document.body.addEventListener('click', function (e) {
+    if (e.target.tagName == 'BUTTON' && e.target.classList.contains('button-consultation')) {
+      console.log(e.target);
+      showPopupConsultation();
+    }
+  });
+  var btnsPopupClose = document.querySelectorAll('.popup-close'); //X
+
+  var popupConsultation = document.querySelector('.popup-consultation'); //overlay
+  //closing popup by clicking on overlay
+
+  popupConsultation.addEventListener('click', hidePopupModalConsultation);
+
+  function hidePopupModalConsultation(e) {
+    console.log('hide design or consultation');
+
+    if (e.target.classList.contains('popup-consultation') || e.target.classList.contains('popup-close')) {
+      popupConsultation.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+  } //closing by clicking on the button "X"
+
+
+  for (var i = 0; i < btnsPopupClose.length; i++) {
+    var btnPopupClose = btnsPopupClose[i];
+    btnPopupClose.addEventListener('click', hidePopupModalConsultation);
+  }
+
+  function showPopupConsultation() {
+    popupConsultation.style.display = 'block'; //popupConsultation.style.zIndex = '1000000000';
+
+    document.body.style.overflow = 'hidden';
+  } // for(let i = 0; i < btnsConsultation.length; i++){
+  // 	let btnConsultation = btnsConsultation[i];
+  // 	btnConsultation.addEventListener('click', showPopupConsultation);
+  // }
+
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (consultation);
+
+/***/ }),
+
+/***/ "./src/js/parts/design.js":
+/*!********************************!*\
+  !*** ./src/js/parts/design.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function design() {
+  console.log('design');
+  document.body.addEventListener('click', function (e) {
+    if (e.target.tagName == 'BUTTON' && e.target.classList.contains('button-design')) {
+      console.log(e.target);
+      showPopupDesign();
+    }
+  }); //popup design
+  //let btnsDesign         = document.getElementsByClassName('button-design');
+
+  var btnsPopupClose = document.querySelectorAll('.popup-close'); //X
+
+  var popupDesignOverlay = document.querySelector('.popup-design'); //overlay
+  //closing popup by clicking on overlay
+
+  popupDesignOverlay.addEventListener('click', hidePopupModal); //Функции закрытия модальных окон
+
+  function hidePopupModal(e) {
+    console.log('modal design closed');
+
+    if (e.target.classList.contains('popup-close') || e.target.classList.contains('popup-design')) {
+      popupDesignOverlay.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+  } //closing by clicking on the button "X"
+
+
+  for (var i = 0; i < btnsPopupClose.length; i++) {
+    var btnPopupClose = btnsPopupClose[i];
+    btnPopupClose.addEventListener('click', hidePopupModal);
+  }
+
+  function showPopupDesign() {
+    var popupsDialog = document.querySelectorAll('.popup-dialog');
+
+    for (var _i = 0; _i < popupsDialog.length; _i++) {
+      var popupDialog = popupsDialog[_i];
+      popupDialog.style.display = 'block';
+    }
+
+    var popupDesignModal = document.querySelector('.popup-design');
+    popupDesignModal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+  }
+
+  var popupOk = document.querySelector('.popup-ok'),
+      popupError = document.querySelector('.popup-error'),
+      nameDF = document.querySelector('#nameDF'),
+      commentDF = document.querySelector('#commentDF'),
+      phoneDF = document.querySelector('.phoneDF'),
+      emailDF = document.querySelector('#emailDF'),
+      designForm = document.forms[0],
+      formDFInput = document.querySelectorAll("input, textarea");
+
+  var hidePopupModalSuccess = function hidePopupModalSuccess(e) {
+    console.log('modal success closed');
+
+    if (e.target.classList.contains('popup-close') || e.target.classList.contains('popup-ok')) {
+      popupOk.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+  };
+
+  var hidePopupModalError = function hidePopupModalError(e) {
+    console.log('modal error closed');
+
+    if (e.target.classList.contains('popup-close') || e.target.classList.contains('popup-error')) {
+      popupError.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+  };
+
+  function allowRusWords() {
+    console.log('typing name');
+    var regexp = /[^А-ЯЁ\s][^\s]/igm;
+    this.value = this.value.replace(regexp, '');
+  }
+
+  function allowRusSentences() {
+    console.log('typing comment');
+    var regexp = /[^А-ЯЁ\s,\.!?][^\s]/igm;
+    this.value = this.value.replace(regexp, '');
+  }
+
+  function allowEmail() {
+    console.log('typing email');
+    var regexp = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,3})$/;
+
+    if (this.value.match(regexp)) {
+      return true;
+    } else {
+      alert('Неверный email');
+      var mes = document.createElement('div');
+      mes.innerHTML = 'Неверный email';
+      popupDesignOverlay.appendChild(mes); //this.value = '';
+
+      return false;
+    }
+  }
+
+  function setCursorPosition(pos, elem) {
+    elem.focus();
+    if (elem.setSelectionRange) elem.setSelectionRange(pos, pos);else if (elem.createTextRange) {
+      var range = elem.createTextRange();
+      range.collapse(true);
+      range.moveEnd("character", pos);
+      range.moveStart("character", pos);
+      range.select();
+    }
+  }
+
+  function mask() {
+    var matrix = this.defaultValue,
+        i = 0,
+        def = matrix.replace(/\D/g, ""),
+        val = this.value.replace(/\D/g, "");
+    def.length >= val.length && (val = def);
+    matrix = matrix.replace(/[_\d]/g, function (a) {
+      return val.charAt(i++) || "_";
+    });
+    this.value = matrix;
+    i = matrix.lastIndexOf(val.substr(-1));
+    i < matrix.length && matrix != this.defaultValue ? i++ : i = matrix.indexOf("_");
+    setCursorPosition(i, this);
+  } //Скрипт к форме дизайн портрета
+
+
+  var message = new Object();
+  message.loading = "Загрузка...";
+  message.success = "Спасибо! Скоро мы с вами свяжемся";
+  message.failure = "Недостаточно данных";
+  var statusMessageDF = document.createElement("div");
+  statusMessageDF.classList.add("status");
+  var formDataDF = new FormData(designForm);
+  designForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    designForm.appendChild(statusMessageDF); //AJAX for contact form
+
+    var request = new XMLHttpRequest();
+    request.open("POST", "server.php");
+    request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    request.send(formDataDF);
+
+    request.onreadystatechange = function () {
+      if (request.status === 200 && request.status < 300) {
+        statusMessage.innerHTML = message.success; //можно  добавлять контент
+
+        popupDesignOverlay.style.display = 'none';
+        popupOk.style.display = 'block';
+      } else {
+        contentDF.innerHTML = message.failure;
+        popupDesignOverlay.style.display = 'none';
+        popupError.style.display = 'block';
+      }
+    };
+
+    for (var _i2 = 0; _i2 < formDFInput.length; _i2++) {
+      formDFInput[_i2].value = ""; // ощищаем поля ввода
+    }
+  });
+  designForm = document.forms[0], formDFInput = document.querySelectorAll("input, textarea");
+
+  function allowRusWords() {
+    console.log('typing name');
+    var regexp = /[^А-ЯЁ\s][^\s]/igm;
+    this.value = this.value.replace(regexp, '');
+  }
+
+  function allowRusSentences() {
+    console.log('typing comment');
+    var regexp = /[^А-ЯЁ\s,\.!?][^\s]/igm;
+    this.value = this.value.replace(regexp, '');
+  }
+
+  function allowEmail() {
+    console.log('typing email');
+    var regexp = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,3})$/;
+
+    if (this.value.match(regexp)) {
+      return true;
+    } else {
+      alert('Неверный email');
+      var mes = document.createElement('div');
+      mes.innerHTML = 'Неверный email';
+      popupDesignOverlay.appendChild(mes); //this.value = '';
+
+      return false;
+    }
+  }
+
+  function setCursorPosition(pos, elem) {
+    elem.focus();
+    if (elem.setSelectionRange) elem.setSelectionRange(pos, pos);else if (elem.createTextRange) {
+      var range = elem.createTextRange();
+      range.collapse(true);
+      range.moveEnd("character", pos);
+      range.moveStart("character", pos);
+      range.select();
+    }
+  }
+
+  function mask(event) {
+    var matrix = this.defaultValue,
+        i = 0,
+        def = matrix.replace(/\D/g, ""),
+        val = this.value.replace(/\D/g, "");
+    def.length >= val.length && (val = def);
+    matrix = matrix.replace(/[_\d]/g, function (a) {
+      return val.charAt(i++) || "_";
+    });
+    this.value = matrix;
+    i = matrix.lastIndexOf(val.substr(-1));
+    i < matrix.length && matrix != this.defaultValue ? i++ : i = matrix.indexOf("_");
+    setCursorPosition(i, this);
+  }
+
+  designForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    designForm.appendChild(statusMessageDF); //AJAX for contact form
+
+    var request = new XMLHttpRequest();
+    request.open("POST", "server.php");
+    request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    request.send(formDataDF);
+
+    request.onreadystatechange = function () {
+      if (request.status === 200 && request.status < 300) {
+        statusMessage.innerHTML = message.success; //можно  добавлять контент
+
+        popupDesignOverlay.style.display = 'none';
+        popupOk.style.display = 'block';
+      } else {
+        contentDF.innerHTML = message.failure;
+        popupDesignOverlay.style.display = 'none';
+        popupError.style.display = 'block';
+      }
+    };
+
+    for (var _i3 = 0; _i3 < formDFInput.length; _i3++) {
+      formDFInput[_i3].value = ""; // ощищаем поля ввода
+    }
+  });
+  phoneDF.addEventListener("input", mask, false);
+  nameDF.addEventListener('input', allowRusWords);
+  commentDF.addEventListener('input', allowRusSentences);
+  emailDF.addEventListener('blur', allowEmail);
+  popupOk.addEventListener('click', hidePopupModalSuccess);
+  popupError.addEventListener('click', hidePopupModalError);
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (design);
+
+/***/ }),
+
 /***/ "./src/js/parts/slider.js":
 /*!********************************!*\
   !*** ./src/js/parts/slider.js ***!
@@ -220,16 +537,21 @@ function slider() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var nodelist_foreach_polyfill__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! nodelist-foreach-polyfill */ "./node_modules/nodelist-foreach-polyfill/index.js");
 /* harmony import */ var nodelist_foreach_polyfill__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(nodelist_foreach_polyfill__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _parts_slider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./parts/slider */ "./src/js/parts/slider.js");
+/* harmony import */ var _parts_design__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./parts/design */ "./src/js/parts/design.js");
+/* harmony import */ var _parts_slider__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./parts/slider */ "./src/js/parts/slider.js");
+/* harmony import */ var _parts_consultation__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./parts/consultation */ "./src/js/parts/consultation.js");
 __webpack_require__(/*! formdata-polyfill */ "./node_modules/formdata-polyfill/formdata.min.js");
 
- //import design from './parts/design';
+
+
 
 
 window.addEventListener('DOMContentLoaded', function () {
-  'use strict'; //design();
+  'use strict';
 
-  Object(_parts_slider__WEBPACK_IMPORTED_MODULE_1__["default"])();
+  Object(_parts_slider__WEBPACK_IMPORTED_MODULE_2__["default"])();
+  Object(_parts_design__WEBPACK_IMPORTED_MODULE_1__["default"])();
+  Object(_parts_consultation__WEBPACK_IMPORTED_MODULE_3__["default"])();
 });
 
 if ('NodeList' in window && !NodeList.prototype.forEach) {

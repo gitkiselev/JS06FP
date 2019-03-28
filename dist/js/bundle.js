@@ -482,6 +482,49 @@ function design() {
 
 /***/ }),
 
+/***/ "./src/js/parts/gift.js":
+/*!******************************!*\
+  !*** ./src/js/parts/gift.js ***!
+  \******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function gift() {
+  console.log('gift');
+  var btnsPopupClose = document.querySelectorAll('.popup-close');
+  var gift = document.querySelector('.fixed-gift');
+  var giftModal = document.querySelector('.popup-gift');
+  gift.addEventListener('click', showGiftModal);
+
+  function showGiftModal() {
+    giftModal.style.display = 'block';
+    document.body.overflow = 'hidden';
+    gift.style.display = 'none';
+  }
+
+  function hidePopupModalGift(e) {
+    console.log('hide design or consultation');
+
+    if (e.target.classList.contains('popup-gift') || e.target.classList.contains('popup-close')) {
+      giftModal.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+  }
+
+  for (var i = 0; i < btnsPopupClose.length; i++) {
+    var btnPopupClose = btnsPopupClose[i];
+    btnPopupClose.addEventListener('click', hidePopupModalGift);
+  }
+
+  giftModal.addEventListener('click', hidePopupModalGift);
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (gift);
+
+/***/ }),
+
 /***/ "./src/js/parts/slider.js":
 /*!********************************!*\
   !*** ./src/js/parts/slider.js ***!
@@ -540,7 +583,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _parts_design__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./parts/design */ "./src/js/parts/design.js");
 /* harmony import */ var _parts_slider__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./parts/slider */ "./src/js/parts/slider.js");
 /* harmony import */ var _parts_consultation__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./parts/consultation */ "./src/js/parts/consultation.js");
+/* harmony import */ var _parts_gift__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./parts/gift */ "./src/js/parts/gift.js");
 __webpack_require__(/*! formdata-polyfill */ "./node_modules/formdata-polyfill/formdata.min.js");
+
 
 
 
@@ -552,6 +597,7 @@ window.addEventListener('DOMContentLoaded', function () {
   Object(_parts_slider__WEBPACK_IMPORTED_MODULE_2__["default"])();
   Object(_parts_design__WEBPACK_IMPORTED_MODULE_1__["default"])();
   Object(_parts_consultation__WEBPACK_IMPORTED_MODULE_3__["default"])();
+  Object(_parts_gift__WEBPACK_IMPORTED_MODULE_4__["default"])();
 });
 
 if ('NodeList' in window && !NodeList.prototype.forEach) {

@@ -4,7 +4,7 @@ require('formdata-polyfill');
 	
 	import slider from './parts/slider';
 	import consultation from './parts/consultation';
-	
+	import gift from './parts/gift';
 	window.addEventListener('DOMContentLoaded', function(){
 		'use strict';
 		
@@ -13,6 +13,7 @@ require('formdata-polyfill');
 		slider();
 		design();
 		consultation();
+		gift();
 		
 		
 		

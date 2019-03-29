@@ -493,32 +493,47 @@ function design() {
 __webpack_require__.r(__webpack_exports__);
 function gift() {
   console.log('gift');
-  var btnsPopupClose = document.querySelectorAll('.popup-close');
-  var gift = document.querySelector('.fixed-gift');
-  var giftModal = document.querySelector('.popup-gift');
+  var giftModal = document.querySelector('.popup-gift'),
+      closeGift = giftModal.querySelector('.popup-close'),
+      gift = document.querySelector('.fixed-gift'),
+      isClicked = false,
+      allBtns = document.querySelectorAll('button');
+
+  for (var i = 0; i < allBtns.length; i++) {
+    var btn = allBtns[i];
+    btn.addEventListener('click', function () {
+      isClicked = true;
+    });
+  }
+
+  var showGiftModal = function showGiftModal() {
+    giftModal.style.display = 'block';
+    gift.style.display = 'none';
+    document.body.style.overflow = 'hidden';
+    isClicked = true;
+  };
+
   gift.addEventListener('click', showGiftModal);
 
-  function showGiftModal() {
-    giftModal.style.display = 'block';
-    document.body.overflow = 'hidden';
-    gift.style.display = 'none';
-  }
+  var hidePopupModalGift = function hidePopupModalGift() {
+    giftModal.style.display = 'none';
+    document.body.style.overflow = '';
+  };
 
-  function hidePopupModalGift(e) {
-    console.log('hide design or consultation');
-
-    if (e.target.classList.contains('popup-gift') || e.target.classList.contains('popup-close')) {
-      giftModal.style.display = 'none';
-      document.body.style.overflow = '';
-    }
-  }
-
-  for (var i = 0; i < btnsPopupClose.length; i++) {
-    var btnPopupClose = btnsPopupClose[i];
-    btnPopupClose.addEventListener('click', hidePopupModalGift);
-  }
-
+  closeGift.addEventListener('click', function () {
+    hidePopupModalGift();
+  });
   giftModal.addEventListener('click', hidePopupModalGift);
+
+  var scroll = function scroll() {
+    if (isClicked === false && window.pageYOffset + window.innerHeight >= document.body.scrollHeight - 100) {
+      console.log('scrolled bottom');
+      showGiftModal();
+      isClicked = true;
+    }
+  };
+
+  window.addEventListener('scroll', scroll);
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (gift);

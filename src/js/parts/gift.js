@@ -1,29 +1,43 @@
 function gift(){
 	console.log('gift');
-	let btnsPopupClose     = document.querySelectorAll('.popup-close');
-	let gift = document.querySelector('.fixed-gift');
-		let giftModal = document.querySelector('.popup-gift');
-		gift.addEventListener('click', showGiftModal);
-		function showGiftModal(){
-			giftModal.style.display = 'block';
-			document.body.overflow = 'hidden';
-			gift.style.display = 'none';
+	let giftModal = document.querySelector('.popup-gift'),
+	closeGift = giftModal.querySelector('.popup-close'),
+	gift = document.querySelector('.fixed-gift'),
+		isClicked = false,
+		allBtns = document.querySelectorAll('button');
+		for (let i = 0; i < allBtns.length; i++) {
+			let btn = allBtns[i];
+			btn.addEventListener('click', () => {
+				isClicked = true;
+			});
 		}
-		function hidePopupModalGift(e){
-			console.log('hide design or consultation');
-			if(e.target.classList.contains('popup-gift') || e.target.classList.contains('popup-close')){
+		let showGiftModal = () => {
+			giftModal.style.display = 'block';
+			gift.style.display = 'none';
+			document.body.style.overflow = 'hidden';
+			isClicked = true;
+		}
+		gift.addEventListener('click', showGiftModal);
+
+		
+		let hidePopupModalGift = () => {
 				giftModal.style.display = 'none';
-				document.body.style.overflow = '';
-			}			
+				document.body.style.overflow = '';	
 		}
 
-		for(let i = 0; i < btnsPopupClose.length; i++){
-			let btnPopupClose = btnsPopupClose[i];
-			btnPopupClose.addEventListener('click', hidePopupModalGift);
-		}
-		
-	
+		closeGift.addEventListener('click', () => {
+			hidePopupModalGift();
+});
 			
 		giftModal.addEventListener('click', hidePopupModalGift);
+		
+		let scroll = () => {
+			if ((isClicked === false) && (window.pageYOffset + window.innerHeight >= document.body.scrollHeight - 100)) {
+				console.log('scrolled bottom');
+				showGiftModal();
+				isClicked = true;
+			}
+		}
+		window.addEventListener('scroll', scroll);
 }
 export default  gift;

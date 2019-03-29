@@ -1,10 +1,10 @@
 require('formdata-polyfill');
 	import 'nodelist-foreach-polyfill';
 	import design from './parts/design';
-	
 	import slider from './parts/slider';
 	import consultation from './parts/consultation';
 	import gift from './parts/gift';
+	import calc from './parts/calc';
 	window.addEventListener('DOMContentLoaded', function(){
 		'use strict';
 		
@@ -14,6 +14,7 @@ require('formdata-polyfill');
 		design();
 		consultation();
 		gift();
+		calc();
 		
 		
 		

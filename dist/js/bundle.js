@@ -165,6 +165,80 @@ module.exports = g;
 
 /***/ }),
 
+/***/ "./src/js/parts/calc.js":
+/*!******************************!*\
+  !*** ./src/js/parts/calc.js ***!
+  \******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function calc() {
+  var selectSize = document.getElementById('size'),
+      selectMaterial = document.getElementById('material'),
+      selectOptions = document.getElementById('options'),
+      promocode = document.getElementsByClassName('promocode')[0],
+      totalValue = document.getElementsByClassName('calc-price ')[0],
+      total = 0;
+  selectSize.addEventListener('change', function () {
+    total = Math.round(selectSize.value * selectMaterial.value * selectOptions.value * 1500);
+
+    if (selectSize.value === '' || selectMaterial.value === '') {
+      totalValue.innerHTML = 'Для расчета нужно выбрать размер картины и материал картины';
+    } else {
+      if (promocode.value == 'IWANTPOPART') {
+        totalValue.innerHTML = total - total * 0.3;
+      } else {
+        totalValue.innerHTML = total;
+      }
+    }
+  });
+  selectMaterial.addEventListener('change', function () {
+    total = Math.round(selectSize.value * selectMaterial.value * selectOptions.value * 1500);
+
+    if (selectSize.value === '' || selectMaterial.value === '') {
+      totalValue.innerHTML = 'Для расчета нужно выбрать размер картины и материал картины';
+    } else {
+      if (promocode.value == 'IWANTPOPART') {
+        totalValue.innerHTML = total - total * 0.3;
+      } else {
+        totalValue.innerHTML = total;
+      }
+    }
+  });
+  selectOptions.addEventListener('change', function () {
+    total = Math.round(selectSize.value * selectMaterial.value * selectOptions.value * 1500);
+
+    if (selectSize.value === '' || selectMaterial.value === '') {
+      totalValue.innerHTML = 'Для расчета нужно выбрать размер картины и материал картины';
+    } else {
+      if (promocode.value == 'IWANTPOPART') {
+        totalValue.innerHTML = total - total * 0.3;
+      } else {
+        totalValue.innerHTML = total;
+      }
+    }
+  });
+  promocode.addEventListener('change', function () {
+    total = Math.round(selectSize.value * selectMaterial.value * selectOptions.value * 1500);
+
+    if (selectSize.value === '' || selectMaterial.value === '') {
+      totalValue.innerHTML = 'Для расчета нужно выбрать размер картины и материал картины';
+    } else {
+      if (promocode.value == 'IWANTPOPART') {
+        totalValue.innerHTML = total - total * 0.3;
+      } else {
+        totalValue.innerHTML = total;
+      }
+    }
+  });
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (calc);
+
+/***/ }),
+
 /***/ "./src/js/parts/consultation.js":
 /*!**************************************!*\
   !*** ./src/js/parts/consultation.js ***!
@@ -599,7 +673,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _parts_slider__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./parts/slider */ "./src/js/parts/slider.js");
 /* harmony import */ var _parts_consultation__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./parts/consultation */ "./src/js/parts/consultation.js");
 /* harmony import */ var _parts_gift__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./parts/gift */ "./src/js/parts/gift.js");
+/* harmony import */ var _parts_calc__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./parts/calc */ "./src/js/parts/calc.js");
 __webpack_require__(/*! formdata-polyfill */ "./node_modules/formdata-polyfill/formdata.min.js");
+
 
 
 
@@ -613,6 +689,7 @@ window.addEventListener('DOMContentLoaded', function () {
   Object(_parts_design__WEBPACK_IMPORTED_MODULE_1__["default"])();
   Object(_parts_consultation__WEBPACK_IMPORTED_MODULE_3__["default"])();
   Object(_parts_gift__WEBPACK_IMPORTED_MODULE_4__["default"])();
+  Object(_parts_calc__WEBPACK_IMPORTED_MODULE_5__["default"])();
 });
 
 if ('NodeList' in window && !NodeList.prototype.forEach) {

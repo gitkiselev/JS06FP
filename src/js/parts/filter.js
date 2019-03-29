@@ -4,9 +4,6 @@ function filter(){
 	let portfolioBlock = document.querySelectorAll('.portfolio-block');
 	let noWorks = document.querySelector('.portfolio-no');
 	
-
-	
-	
 	portfolioMenu.addEventListener('click', function(e){
 		let targetClass = e.target.getAttribute('class');
 		if(e.target.classList.contains('active')){
@@ -19,17 +16,20 @@ function filter(){
 			}
 			for(let i = 0; i < portfolioBlock.length; i++){
 				console.log(targetClass);
-					portfolioBlock[i].style.display = 'none';//прячем все блоки
+					portfolioBlock[i].style.display = 'none';
+					
 					
 					if(portfolioBlock[i].classList.contains(targetClass)){
 						portfolioBlock[i].style.display = 'block';
-
+						noWorks.style.display = 'none';
 					}
 					} 
 			e.target.classList.add('active');
 			if (e.target.classList.contains('grandmother') || e.target.classList.contains('granddad')){
 				
 		noWorks.style.display = 'block';
+			} else {
+				noWorks.style.display = 'none';
 			}
 		}
 			

@@ -250,17 +250,18 @@ function calc() {
 __webpack_require__.r(__webpack_exports__);
 function consultation() {
   console.log('consultation');
+  var giftModal = document.querySelector('.popup-gift'),
+      popupDesignOverlay = document.querySelector('.popup-design'),
+      //overlay
+  btnsPopupClose = document.querySelectorAll('.popup-close'),
+      popupConsultation = document.querySelector('.popup-consultation'); //overlay
+
   document.body.addEventListener('click', function (e) {
     if (e.target.tagName == 'BUTTON' && e.target.classList.contains('button-consultation')) {
       console.log(e.target);
       showPopupConsultation();
     }
   });
-  var btnsPopupClose = document.querySelectorAll('.popup-close'); //X
-
-  var popupConsultation = document.querySelector('.popup-consultation'); //overlay
-  //closing popup by clicking on overlay
-
   popupConsultation.addEventListener('click', hidePopupModalConsultation);
 
   function hidePopupModalConsultation(e) {
@@ -270,23 +271,33 @@ function consultation() {
       popupConsultation.style.display = 'none';
       document.body.style.overflow = '';
     }
-  } //closing by clicking on the button "X"
-
+  }
 
   for (var i = 0; i < btnsPopupClose.length; i++) {
     var btnPopupClose = btnsPopupClose[i];
     btnPopupClose.addEventListener('click', hidePopupModalConsultation);
+    clearTimeout(timerId);
   }
 
   function showPopupConsultation() {
-    popupConsultation.style.display = 'block'; //popupConsultation.style.zIndex = '1000000000';
-
+    popupConsultation.style.display = 'block';
     document.body.style.overflow = 'hidden';
-  } // for(let i = 0; i < btnsConsultation.length; i++){
-  // 	let btnConsultation = btnsConsultation[i];
-  // 	btnConsultation.addEventListener('click', showPopupConsultation);
-  // }
+  }
 
+  var timerId = setTimeout(function () {
+    openModal();
+  }, 5000);
+
+  function openModal() {
+    var computedStyleCons = window.getComputedStyle(popupConsultation).display,
+        computedStyleGift = window.getComputedStyle(giftModal).display,
+        computedStyleDesign = window.getComputedStyle(popupDesignOverlay).display;
+
+    if (computedStyleCons == 'none' && computedStyleGift == 'none' && computedStyleDesign == 'none') {
+      popupConsultation.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    }
+  }
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (consultation);
@@ -582,10 +593,11 @@ function filter() {
 
       for (var _i = 0; _i < portfolioBlock.length; _i++) {
         console.log(targetClass);
-        portfolioBlock[_i].style.display = 'none'; //прячем все блоки
+        portfolioBlock[_i].style.display = 'none';
 
         if (portfolioBlock[_i].classList.contains(targetClass)) {
           portfolioBlock[_i].style.display = 'block';
+          noWorks.style.display = 'none';
         }
       }
 
@@ -593,6 +605,8 @@ function filter() {
 
       if (e.target.classList.contains('grandmother') || e.target.classList.contains('granddad')) {
         noWorks.style.display = 'block';
+      } else {
+        noWorks.style.display = 'none';
       }
     }
   });

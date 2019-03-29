@@ -5,6 +5,7 @@ require('formdata-polyfill');
 	import consultation from './parts/consultation';
 	import gift from './parts/gift';
 	import calc from './parts/calc';
+	import filter from './parts/filter';
 	window.addEventListener('DOMContentLoaded', function(){
 		'use strict';
 		
@@ -15,6 +16,7 @@ require('formdata-polyfill');
 		consultation();
 		gift();
 		calc();
+		filter();
 		
 		
 		

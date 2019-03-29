@@ -556,6 +556,52 @@ function design() {
 
 /***/ }),
 
+/***/ "./src/js/parts/filter.js":
+/*!********************************!*\
+  !*** ./src/js/parts/filter.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function filter() {
+  console.log('filter');
+  var portfolioMenu = document.querySelector('.portfolio-menu');
+  var portfolioBlock = document.querySelectorAll('.portfolio-block');
+  var noWorks = document.querySelector('.portfolio-no');
+  portfolioMenu.addEventListener('click', function (e) {
+    var targetClass = e.target.getAttribute('class');
+
+    if (e.target.classList.contains('active')) {
+      return;
+    } else {
+      for (var i = 0; i < portfolioMenu.children.length; i++) {
+        portfolioMenu.children[i].classList.remove('active');
+      }
+
+      for (var _i = 0; _i < portfolioBlock.length; _i++) {
+        console.log(targetClass);
+        portfolioBlock[_i].style.display = 'none'; //прячем все блоки
+
+        if (portfolioBlock[_i].classList.contains(targetClass)) {
+          portfolioBlock[_i].style.display = 'block';
+        }
+      }
+
+      e.target.classList.add('active');
+
+      if (e.target.classList.contains('grandmother') || e.target.classList.contains('granddad')) {
+        noWorks.style.display = 'block';
+      }
+    }
+  });
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (filter);
+
+/***/ }),
+
 /***/ "./src/js/parts/gift.js":
 /*!******************************!*\
   !*** ./src/js/parts/gift.js ***!
@@ -674,7 +720,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _parts_consultation__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./parts/consultation */ "./src/js/parts/consultation.js");
 /* harmony import */ var _parts_gift__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./parts/gift */ "./src/js/parts/gift.js");
 /* harmony import */ var _parts_calc__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./parts/calc */ "./src/js/parts/calc.js");
+/* harmony import */ var _parts_filter__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./parts/filter */ "./src/js/parts/filter.js");
 __webpack_require__(/*! formdata-polyfill */ "./node_modules/formdata-polyfill/formdata.min.js");
+
 
 
 
@@ -690,6 +738,7 @@ window.addEventListener('DOMContentLoaded', function () {
   Object(_parts_consultation__WEBPACK_IMPORTED_MODULE_3__["default"])();
   Object(_parts_gift__WEBPACK_IMPORTED_MODULE_4__["default"])();
   Object(_parts_calc__WEBPACK_IMPORTED_MODULE_5__["default"])();
+  Object(_parts_filter__WEBPACK_IMPORTED_MODULE_6__["default"])();
 });
 
 if ('NodeList' in window && !NodeList.prototype.forEach) {

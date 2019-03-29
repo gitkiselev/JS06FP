@@ -8,6 +8,7 @@ require('formdata-polyfill');
 	import filter from './parts/filter';
 	import sliderBottom from './parts/sliderBottom';
 	import expansion from './parts/expansion';
+	import form from './parts/form';
 
 	window.addEventListener('DOMContentLoaded', function(){
 		'use strict';
@@ -22,6 +23,7 @@ require('formdata-polyfill');
 		filter();
 		sliderBottom();
 		expansion();
+		form();
 		
 		
 		

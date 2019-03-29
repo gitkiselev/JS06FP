@@ -129,7 +129,10 @@ function mask() {
 		i < matrix.length && matrix != this.defaultValue ? i++ : i = matrix.indexOf("_");
 		setCursorPosition(i, this)
 }
-
+					phoneDF.addEventListener("input", mask, false)
+	    nameDF.addEventListener('input', allowRusWords);
+	    commentDF.addEventListener('input', allowRusSentences);
+	    emailDF.addEventListener('blur', allowEmail);
 
 	//Скрипт к форме дизайн портрета
 	let message = new Object();
@@ -221,7 +224,7 @@ let formDataDF = new FormData(designForm);
 		}
 }
 
-function mask(event) {
+function mask() {
 		var matrix = this.defaultValue,
 						i = 0,
 						def = matrix.replace(/\D/g, ""),

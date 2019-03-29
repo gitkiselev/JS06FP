@@ -437,8 +437,12 @@ function design() {
     i = matrix.lastIndexOf(val.substr(-1));
     i < matrix.length && matrix != this.defaultValue ? i++ : i = matrix.indexOf("_");
     setCursorPosition(i, this);
-  } //Скрипт к форме дизайн портрета
+  }
 
+  phoneDF.addEventListener("input", mask, false);
+  nameDF.addEventListener('input', allowRusWords);
+  commentDF.addEventListener('input', allowRusSentences);
+  emailDF.addEventListener('blur', allowEmail); //Скрипт к форме дизайн портрета
 
   var message = new Object();
   message.loading = "Загрузка...";
@@ -514,7 +518,7 @@ function design() {
     }
   }
 
-  function mask(event) {
+  function mask() {
     var matrix = this.defaultValue,
         i = 0,
         def = matrix.replace(/\D/g, ""),
@@ -643,6 +647,95 @@ function filter() {
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (filter);
+
+/***/ }),
+
+/***/ "./src/js/parts/form.js":
+/*!******************************!*\
+  !*** ./src/js/parts/form.js ***!
+  \******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function form() {
+  console.log('form');
+  var mainForm = document.getElementsByName('form')[2];
+  var allInputs = mainForm.getElementsByName('input');
+  var nameMainForm = document.getElementById('nameMainForm');
+  var phoneMainForm = document.getElementById('phoneMainForm');
+  var emailMainForm = document.getElementById('emailMainForm');
+  var textMainForm = document.getElementById('textMainForm');
+
+  var clearInputs = function clearInputs() {
+    for (var i = 0; i < allInputs.length; i++) {
+      var input = allInputs[i];
+      input.value = '';
+    }
+  };
+
+  function allowRusWords() {
+    console.log('typing name');
+    var regexp = /[^А-ЯЁ\s][^\s]/igm;
+    this.value = this.value.replace(regexp, '');
+  }
+
+  function allowRusSentences() {
+    console.log('typing comment');
+    var regexp = /[^А-ЯЁ\s,\.!?][^\s]/igm;
+    this.value = this.value.replace(regexp, '');
+  }
+
+  function allowEmail() {
+    console.log('typing email');
+    var regexp = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,3})$/;
+
+    if (this.value.match(regexp)) {
+      return true;
+    } else {
+      alert('Неверный email');
+      var mes = document.createElement('div');
+      mes.innerHTML = 'Неверный email';
+      popupDesignOverlay.appendChild(mes); //this.value = '';
+
+      return false;
+    }
+  }
+
+  function setCursorPosition(pos, elem) {
+    elem.focus();
+    if (elem.setSelectionRange) elem.setSelectionRange(pos, pos);else if (elem.createTextRange) {
+      var range = elem.createTextRange();
+      range.collapse(true);
+      range.moveEnd("character", pos);
+      range.moveStart("character", pos);
+      range.select();
+    }
+  }
+
+  function mask() {
+    var matrix = this.defaultValue,
+        i = 0,
+        def = matrix.replace(/\D/g, ""),
+        val = this.value.replace(/\D/g, "");
+    def.length >= val.length && (val = def);
+    matrix = matrix.replace(/[_\d]/g, function (a) {
+      return val.charAt(i++) || "_";
+    });
+    this.value = matrix;
+    i = matrix.lastIndexOf(val.substr(-1));
+    i < matrix.length && matrix != this.defaultValue ? i++ : i = matrix.indexOf("_");
+    setCursorPosition(i, this);
+  }
+
+  phoneMainForm.addEventListener("input", mask, false);
+  nameMainForm.addEventListener('input', allowRusWords);
+  textMainForm.addEventListener('input', allowRusSentences);
+  emailMainForm.addEventListener('blur', allowEmail);
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (form);
 
 /***/ }),
 
@@ -823,7 +916,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _parts_filter__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./parts/filter */ "./src/js/parts/filter.js");
 /* harmony import */ var _parts_sliderBottom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./parts/sliderBottom */ "./src/js/parts/sliderBottom.js");
 /* harmony import */ var _parts_expansion__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./parts/expansion */ "./src/js/parts/expansion.js");
+/* harmony import */ var _parts_form__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./parts/form */ "./src/js/parts/form.js");
 __webpack_require__(/*! formdata-polyfill */ "./node_modules/formdata-polyfill/formdata.min.js");
+
 
 
 
@@ -845,6 +940,7 @@ window.addEventListener('DOMContentLoaded', function () {
   Object(_parts_filter__WEBPACK_IMPORTED_MODULE_6__["default"])();
   Object(_parts_sliderBottom__WEBPACK_IMPORTED_MODULE_7__["default"])();
   Object(_parts_expansion__WEBPACK_IMPORTED_MODULE_8__["default"])();
+  Object(_parts_form__WEBPACK_IMPORTED_MODULE_9__["default"])();
 });
 
 if ('NodeList' in window && !NodeList.prototype.forEach) {

@@ -34,7 +34,7 @@ function consultation(){
 	}
 	let timerId = setTimeout(() => {
 		openModal();
-}, 5000);
+}, 60000);
 	
 function openModal() {
 	let computedStyleCons = window.getComputedStyle(popupConsultation).display,

@@ -286,7 +286,7 @@ function consultation() {
 
   var timerId = setTimeout(function () {
     openModal();
-  }, 5000);
+  }, 60000);
 
   function openModal() {
     var computedStyleCons = window.getComputedStyle(popupConsultation).display,
@@ -567,6 +567,36 @@ function design() {
 
 /***/ }),
 
+/***/ "./src/js/parts/expansion.js":
+/*!***********************************!*\
+  !*** ./src/js/parts/expansion.js ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function expansion() {
+  console.log('expansion');
+  var moreBtn = document.querySelector('.button-styles');
+  var showHiddenBlocks = document.querySelectorAll('.styles-2');
+
+  function showHiddenBlocksFunc() {
+    for (var i = 0; i < showHiddenBlocks.length; i++) {
+      var showHiddenBlock = showHiddenBlocks[i];
+      showHiddenBlock.classList.remove('hidden-lg', 'hidden-md', 'hidden-sm', 'hidden-xs');
+    }
+
+    moreBtn.style.display = 'none';
+  }
+
+  moreBtn.addEventListener('click', showHiddenBlocksFunc);
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (expansion);
+
+/***/ }),
+
 /***/ "./src/js/parts/filter.js":
 /*!********************************!*\
   !*** ./src/js/parts/filter.js ***!
@@ -718,6 +748,62 @@ function slider() {
 
 /***/ }),
 
+/***/ "./src/js/parts/sliderBottom.js":
+/*!**************************************!*\
+  !*** ./src/js/parts/sliderBottom.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function sliderBottom() {
+  console.log('sliderBottom');
+  var slideIndex1 = 1;
+  var slides1 = document.getElementsByClassName('feedback-slider-item');
+  var prev1 = document.querySelector('.main-prev-btn');
+  var next1 = document.querySelector('.main-next-btn');
+  setInterval(function () {
+    plusSlides1(1);
+  }, 3000);
+  showSlides1(slideIndex1);
+
+  function showSlides1(n) {
+    if (n > slides1.length) {
+      slideIndex1 = 1;
+    }
+
+    if (n < 1) {
+      slideIndex1 = slides1.length;
+    }
+
+    for (var i = 0; i < slides1.length; i++) {
+      slides1[i].style.display = 'none';
+    }
+
+    slides1[slideIndex1 - 1].style.display = 'block';
+  }
+
+  function plusSlides1(n) {
+    showSlides1(slideIndex1 += n);
+  }
+
+  function currentSlide1(n) {
+    showSlides1(slideIndex1 = n);
+  }
+
+  prev1.addEventListener('click', function () {
+    plusSlides1(-1);
+  });
+  next1.addEventListener('click', function () {
+    plusSlides1(1);
+  });
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (sliderBottom);
+
+/***/ }),
+
 /***/ "./src/js/script.js":
 /*!**************************!*\
   !*** ./src/js/script.js ***!
@@ -735,7 +821,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _parts_gift__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./parts/gift */ "./src/js/parts/gift.js");
 /* harmony import */ var _parts_calc__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./parts/calc */ "./src/js/parts/calc.js");
 /* harmony import */ var _parts_filter__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./parts/filter */ "./src/js/parts/filter.js");
+/* harmony import */ var _parts_sliderBottom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./parts/sliderBottom */ "./src/js/parts/sliderBottom.js");
+/* harmony import */ var _parts_expansion__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./parts/expansion */ "./src/js/parts/expansion.js");
 __webpack_require__(/*! formdata-polyfill */ "./node_modules/formdata-polyfill/formdata.min.js");
+
+
 
 
 
@@ -753,6 +843,8 @@ window.addEventListener('DOMContentLoaded', function () {
   Object(_parts_gift__WEBPACK_IMPORTED_MODULE_4__["default"])();
   Object(_parts_calc__WEBPACK_IMPORTED_MODULE_5__["default"])();
   Object(_parts_filter__WEBPACK_IMPORTED_MODULE_6__["default"])();
+  Object(_parts_sliderBottom__WEBPACK_IMPORTED_MODULE_7__["default"])();
+  Object(_parts_expansion__WEBPACK_IMPORTED_MODULE_8__["default"])();
 });
 
 if ('NodeList' in window && !NodeList.prototype.forEach) {

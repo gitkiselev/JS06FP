@@ -1,6 +1,8 @@
 function calc() {
 
 	let selectSize = document.getElementById('size'),
+					calcForm = document.querySelector('.calc'),
+					calcSubmitBtn = calcForm.querySelector('button'),
 					selectMaterial = document.getElementById('material'),
 					selectOptions = document.getElementById('options'),
 					promocode = document.getElementsByClassName('promocode')[0],
@@ -76,6 +78,15 @@ function calc() {
 									}
 					}
 
+	});
+	calcSubmitBtn.disabled = true;
+	calcSubmitBtn.addEventListener('click', function(){
+		if(selectSize.value !== '' || selectMaterial.value !== ''){
+			calcSubmitBtn.disabled == false;
+			alert('Спасибо за заказ!');
+		} else {
+			calcSubmitBtn.disabled = true;
+		}
 	});
 }
 

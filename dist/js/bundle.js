@@ -227,6 +227,8 @@ function accordion() {
 __webpack_require__.r(__webpack_exports__);
 function calc() {
   var selectSize = document.getElementById('size'),
+      calcForm = document.querySelector('.calc'),
+      calcSubmitBtn = calcForm.querySelector('button'),
       selectMaterial = document.getElementById('material'),
       selectOptions = document.getElementById('options'),
       promocode = document.getElementsByClassName('promocode')[0],
@@ -301,6 +303,15 @@ function calc() {
       }
     }
   });
+  calcSubmitBtn.disabled = true;
+  calcSubmitBtn.addEventListener('click', function () {
+    if (selectSize.value !== '' || selectMaterial.value !== '') {
+      calcSubmitBtn.disabled == false;
+      alert('Спасибо за заказ!');
+    } else {
+      calcSubmitBtn.disabled = true;
+    }
+  });
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (calc);
@@ -326,8 +337,10 @@ function consultation() {
       popupDesignOverlay = document.querySelector('.popup-design'),
       //overlay
   btnsPopupClose = document.querySelectorAll('.popup-close'),
-      popupConsultation = document.querySelector('.popup-consultation'); //overlay
-
+      popupConsultation = document.querySelector('.popup-consultation'),
+      //overlay
+  popupOk = document.querySelector('.popup-ok'),
+      popupError = document.querySelector('.popup-error');
   document.body.addEventListener('click', function (e) {
     if (e.target.tagName == 'BUTTON' && e.target.classList.contains('button-consultation')) {
       console.log(e.target);
@@ -411,14 +424,15 @@ function consultation() {
     }
   }
 
+  var formDataCons = new FormData(form);
   form.addEventListener("submit", function (e) {
-    e.preventDefault();
-    designForm.appendChild(statusMessageDF); //AJAX for contact form
+    e.preventDefault(); //form.appendChild(statusMessage);
+    //AJAX for contact form
 
     var request = new XMLHttpRequest();
     request.open("POST", "./server.php");
     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    request.send(formDataDF);
+    request.send(formDataCons);
 
     request.onreadystatechange = function () {
       if (request.status === 200 && request.status < 300) {
@@ -617,12 +631,12 @@ function design() {
 
     request.onreadystatechange = function () {
       if (request.status === 200 && request.status < 300) {
-        statusMessage.innerHTML = message.success; //можно  добавлять контент
-
+        //statusMessage.innerHTML = message.success;
+        //можно  добавлять контент
         popupDesignOverlay.style.display = 'none';
         popupOk.style.display = 'block';
       } else {
-        contentDF.innerHTML = message.failure;
+        ///contentDF.innerHTML = message.failure;
         popupDesignOverlay.style.display = 'none';
         popupError.style.display = 'block';
       }
@@ -821,12 +835,27 @@ function form() {
     request.open("POST", "./server.php");
     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     request.send(formDataMainForm);
+    var message = new Object();
+    message.loading = "Загрузка...";
+    message.success = "Спасибо! Скоро мы с вами свяжемся";
+    message.failure = "Недостаточно данных";
+    var div = document.createElement('div');
+    div.classList.add('status');
+    var statusDiv = document.getElementsByClassName('status')[0];
+    statusDiv.style.textAlign = 'center';
+
+    function submitMessage(text) {
+      statusDiv.innerHTML = text;
+      setTimeout(function () {
+        statusDiv.remove();
+      }, 3000);
+    }
 
     request.onreadystatechange = function () {
       if (request.status === 200 && request.status < 300) {
-        popupOk.style.display = 'block';
+        submitMessage(message.success);
       } else {
-        popupError.style.display = 'block';
+        submitMessage(message.failure);
       }
     };
 
@@ -952,6 +981,56 @@ function hover() {
 
 /***/ }),
 
+/***/ "./src/js/parts/menu.js":
+/*!******************************!*\
+  !*** ./src/js/parts/menu.js ***!
+  \******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function menu() {
+  console.log('menu');
+  var mobileMenu = document.querySelector('.burger');
+  var textMenu = mobileMenu.querySelector('span');
+  var desktopMenu = document.querySelector('.header-menu');
+  var burgerList = document.querySelector('.burger-menu');
+  var width = document.body.clientWidth;
+  window.addEventListener('load', toggleMenu);
+  window.addEventListener('resize', toggleMenu);
+  mobileMenu.addEventListener('click', toggleOpening);
+
+  function toggleOpening() {
+    console.log('click');
+
+    if (burgerList.style.display == 'block') {
+      burgerList.style.display = 'none';
+    } else {
+      burgerList.style.display = 'block';
+    }
+  }
+
+  function toggleMenu() {
+    console.log('resizing...');
+
+    if (width <= 1080) {
+      console.log('width equals: ' + width);
+      mobileMenu.style.display = 'block';
+      desktopMenu.style.display = 'none';
+      textMenu.style.display = 'none';
+    } else if (width > 1080) {
+      desktopMenu.style.display = 'block';
+      burgerList.style.display = 'none';
+      mobileMenu.style.display = 'none';
+    }
+  }
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (menu);
+
+/***/ }),
+
 /***/ "./src/js/parts/slider.js":
 /*!********************************!*\
   !*** ./src/js/parts/slider.js ***!
@@ -1073,7 +1152,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _parts_form__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./parts/form */ "./src/js/parts/form.js");
 /* harmony import */ var _parts_hover__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./parts/hover */ "./src/js/parts/hover.js");
 /* harmony import */ var _parts_accordion__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./parts/accordion */ "./src/js/parts/accordion.js");
+/* harmony import */ var _parts_menu__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./parts/menu */ "./src/js/parts/menu.js");
 __webpack_require__(/*! formdata-polyfill */ "./node_modules/formdata-polyfill/formdata.min.js");
+
 
 
 
@@ -1101,6 +1182,7 @@ window.addEventListener('DOMContentLoaded', function () {
   Object(_parts_form__WEBPACK_IMPORTED_MODULE_9__["default"])();
   Object(_parts_hover__WEBPACK_IMPORTED_MODULE_10__["default"])();
   Object(_parts_accordion__WEBPACK_IMPORTED_MODULE_11__["default"])();
+  Object(_parts_menu__WEBPACK_IMPORTED_MODULE_12__["default"])();
 });
 
 if ('NodeList' in window && !NodeList.prototype.forEach) {

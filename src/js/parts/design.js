@@ -198,12 +198,12 @@ function mask() {
 			request.onreadystatechange = function() {
 					if (request.status === 200 && request.status < 300) {
 								
-									statusMessage.innerHTML = message.success;
+									//statusMessage.innerHTML = message.success;
 									//можно  добавлять контент
 									popupDesignOverlay.style.display = 'none';
 									popupOk.style.display = 'block';
 							} else {
-									contentDF.innerHTML = message.failure;
+									///contentDF.innerHTML = message.failure;
 									popupDesignOverlay.style.display = 'none';
 									popupError.style.display = 'block';
 							}

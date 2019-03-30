@@ -7,7 +7,9 @@ function consultation(){
 	phoneConsForm = document.getElementById('phoneConsForm'),
 	popupDesignOverlay = document.querySelector('.popup-design'),//overlay
 	btnsPopupClose     = document.querySelectorAll('.popup-close'),
-	popupConsultation = document.querySelector('.popup-consultation');//overlay
+	popupConsultation = document.querySelector('.popup-consultation'),//overlay
+	popupOk    = document.querySelector('.popup-ok'),
+	popupError = document.querySelector('.popup-error');
 	document.body.addEventListener('click', e => {
 		if (e.target.tagName == 'BUTTON' && e.target.classList.contains('button-consultation')) {
 			console.log(e.target);
@@ -86,9 +88,10 @@ function openModal() {
 					document.body.style.overflow = 'hidden';
 	}
 }
+let formDataCons = new FormData(form);
 form.addEventListener("submit", function(e) {
 	e.preventDefault();
-	designForm.appendChild(statusMessageDF);
+	//form.appendChild(statusMessage);
 	//AJAX for contact form
 	let request = new XMLHttpRequest();
 	request.open("POST", "./server.php");
@@ -96,7 +99,7 @@ form.addEventListener("submit", function(e) {
 			"Content-Type",
 			"application/x-www-form-urlencoded"
 	);
-	request.send(formDataDF);
+	request.send(formDataCons);
 	
 	request.onreadystatechange = function() {
 		if (request.status === 200 && request.status < 300) {

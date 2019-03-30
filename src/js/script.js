@@ -11,6 +11,7 @@ require('formdata-polyfill');
 	import form from './parts/form';
 	import hover from './parts/hover';
  import accordion from './parts/accordion';
+ import menu from './parts/menu';
 	window.addEventListener('DOMContentLoaded', function(){
 		'use strict';
 		
@@ -27,7 +28,7 @@ require('formdata-polyfill');
 		form();
 		hover();
 		accordion();
-		
+		menu();
 });
 if ('NodeList' in window && !NodeList.prototype.forEach) {
 	console.info('polyfill for IE11');

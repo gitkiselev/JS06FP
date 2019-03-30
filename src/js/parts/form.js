@@ -80,12 +80,28 @@ mainForm.addEventListener("submit", function(e) {
 			"application/x-www-form-urlencoded"
 	);
 	request.send(formDataMainForm);
-	
+	let message = new Object();
+	message.loading = "Загрузка...";
+	message.success = "Спасибо! Скоро мы с вами свяжемся";
+	message.failure = "Недостаточно данных";
+	let div = document.createElement('div');
+	div.classList.add('status');
+	let statusDiv = document.getElementsByClassName('status')[0];
+	statusDiv.style.textAlign = 'center';
+	function submitMessage(text){
+		statusDiv.innerHTML = text;
+		setTimeout(function(){
+			statusDiv.remove();
+		}, 3000);
+		
+	}
 	request.onreadystatechange = function() {
+		
+
 			if (request.status === 200 && request.status < 300) {
-							popupOk.style.display = 'block';
+							submitMessage(message.success);
 					} else {
-							popupError.style.display = 'block';
+						submitMessage(message.failure);
 					}
 	};
 	clearInputs();

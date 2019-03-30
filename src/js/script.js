@@ -9,6 +9,7 @@ require('formdata-polyfill');
 	import sliderBottom from './parts/sliderBottom';
 	import expansion from './parts/expansion';
 	import form from './parts/form';
+	import hover from './parts/hover';
 
 	window.addEventListener('DOMContentLoaded', function(){
 		'use strict';
@@ -24,7 +25,7 @@ require('formdata-polyfill');
 		sliderBottom();
 		expansion();
 		form();
-		
+		hover();
 		
 		
 });

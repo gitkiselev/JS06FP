@@ -835,6 +835,55 @@ function gift() {
 
 /***/ }),
 
+/***/ "./src/js/parts/hover.js":
+/*!*******************************!*\
+  !*** ./src/js/parts/hover.js ***!
+  \*******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function hover() {
+  console.log('hover');
+  var sizesBlock = document.querySelectorAll('.sizes-block');
+  var sw = document.querySelector('.sizes-wrapper'); //общий контейнер
+
+  var imgs = sw.querySelectorAll('img');
+  sw.addEventListener('mouseover', showImages);
+  sw.addEventListener('mouseout', hideImages);
+  sw.addEventListener('tap', showImages);
+  sw.addEventListener('tap', hideImagesM);
+
+  function showImages(e) {
+    if (e.target.tagName == 'IMG') {
+      e.target.style.position = 'relative';
+      e.target.style.zIndex = '10';
+      e.target.src = e.target.src.replace('.png', '-1.png');
+    }
+  }
+
+  function hideImages(e) {
+    if (e.target.tagName == 'IMG') {
+      e.target.style.position = '';
+      e.target.style.zIndex = '';
+      e.target.src = e.target.src.replace('-1.png', '.png');
+    }
+  }
+
+  function hideImagesM(e) {
+    if (e.target.tagName != 'IMG') {
+      e.target.style.position = '';
+      e.target.style.zIndex = '';
+      e.target.src = e.target.src.replace('-1.png', '.png');
+    }
+  }
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (hover);
+
+/***/ }),
+
 /***/ "./src/js/parts/slider.js":
 /*!********************************!*\
   !*** ./src/js/parts/slider.js ***!
@@ -954,7 +1003,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _parts_sliderBottom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./parts/sliderBottom */ "./src/js/parts/sliderBottom.js");
 /* harmony import */ var _parts_expansion__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./parts/expansion */ "./src/js/parts/expansion.js");
 /* harmony import */ var _parts_form__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./parts/form */ "./src/js/parts/form.js");
+/* harmony import */ var _parts_hover__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./parts/hover */ "./src/js/parts/hover.js");
 __webpack_require__(/*! formdata-polyfill */ "./node_modules/formdata-polyfill/formdata.min.js");
+
 
 
 
@@ -978,6 +1029,7 @@ window.addEventListener('DOMContentLoaded', function () {
   Object(_parts_sliderBottom__WEBPACK_IMPORTED_MODULE_7__["default"])();
   Object(_parts_expansion__WEBPACK_IMPORTED_MODULE_8__["default"])();
   Object(_parts_form__WEBPACK_IMPORTED_MODULE_9__["default"])();
+  Object(_parts_hover__WEBPACK_IMPORTED_MODULE_10__["default"])();
 });
 
 if ('NodeList' in window && !NodeList.prototype.forEach) {

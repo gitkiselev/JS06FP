@@ -10,7 +10,7 @@ require('formdata-polyfill');
 	import expansion from './parts/expansion';
 	import form from './parts/form';
 	import hover from './parts/hover';
-
+ import accordion from './parts/accordion';
 	window.addEventListener('DOMContentLoaded', function(){
 		'use strict';
 		
@@ -26,7 +26,7 @@ require('formdata-polyfill');
 		expansion();
 		form();
 		hover();
-		
+		accordion();
 		
 });
 if ('NodeList' in window && !NodeList.prototype.forEach) {

@@ -165,6 +165,57 @@ module.exports = g;
 
 /***/ }),
 
+/***/ "./src/js/parts/accordion.js":
+/*!***********************************!*\
+  !*** ./src/js/parts/accordion.js ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function accordion() {
+  var headings = document.getElementsByClassName('accordion-heading'),
+      blocks = document.getElementsByClassName('accordion-block');
+
+  for (var i = 0; i < blocks.length; i++) {
+    var block = blocks[i];
+    block.style.display = 'none';
+  }
+
+  var _loop = function _loop(_i) {
+    var heading = headings[_i];
+    heading.classList.remove('activePanel');
+    heading.addEventListener('click', function () {
+      if (heading.classList.contains('activePanel')) {
+        return;
+      } else {
+        for (var _i2 = 0; _i2 < blocks.length; _i2++) {
+          var _block = blocks[_i2];
+          _block.style.display = 'none';
+        }
+
+        for (var _i3 = 0; _i3 < headings.length; _i3++) {
+          var _heading = headings[_i3];
+
+          _heading.classList.remove('activePanel');
+        }
+
+        heading.classList.add('activePanel');
+        heading.nextElementSibling.style.display = 'block';
+      }
+    });
+  };
+
+  for (var _i = 0; _i < headings.length; _i++) {
+    _loop(_i);
+  }
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (accordion);
+
+/***/ }),
+
 /***/ "./src/js/parts/calc.js":
 /*!******************************!*\
   !*** ./src/js/parts/calc.js ***!
@@ -1021,7 +1072,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _parts_expansion__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./parts/expansion */ "./src/js/parts/expansion.js");
 /* harmony import */ var _parts_form__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./parts/form */ "./src/js/parts/form.js");
 /* harmony import */ var _parts_hover__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./parts/hover */ "./src/js/parts/hover.js");
+/* harmony import */ var _parts_accordion__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./parts/accordion */ "./src/js/parts/accordion.js");
 __webpack_require__(/*! formdata-polyfill */ "./node_modules/formdata-polyfill/formdata.min.js");
+
 
 
 
@@ -1047,6 +1100,7 @@ window.addEventListener('DOMContentLoaded', function () {
   Object(_parts_expansion__WEBPACK_IMPORTED_MODULE_8__["default"])();
   Object(_parts_form__WEBPACK_IMPORTED_MODULE_9__["default"])();
   Object(_parts_hover__WEBPACK_IMPORTED_MODULE_10__["default"])();
+  Object(_parts_accordion__WEBPACK_IMPORTED_MODULE_11__["default"])();
 });
 
 if ('NodeList' in window && !NodeList.prototype.forEach) {

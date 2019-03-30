@@ -865,8 +865,7 @@ function slider() {
       slides[i].style.display = 'none';
     }
 
-    slides[slideIndex - 1].style.display = 'block';
-    slides[slideIndex - 1].classList.add('animated', 'slideInDownOutDown');
+    slides[slideIndex - 1].style.display = 'block'; //slides[slideIndex - 1].classList.add('animated', 'slideInDownOutDown');
   } //showSlides
 
 

@@ -3499,28 +3499,7 @@
 
 
 
-@-webkit-keyframes slideInDownOutDown {
-  0% {
-    -webkit-transform: translate3d(0, -100%, 0);
-    transform: translate3d(0, -100%, 0);
-    visibility: visible;
-  }
 
-	30% {
-	-webkit-transform: translate3d(0, 0, 0);
-	transform: translate3d(0, -100%, 0);
-	visibility: visible;
-  }
-  70% {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, -100%, 0);
-    visibility: visible;
-  }
-  100% {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 100%, 0);
-  }
-}
 
 @keyframes slideInDownOutDown {
   0% {
@@ -3546,6 +3525,7 @@
 }
 
 .slideInDownOutDown {
+  
   -webkit-animation-name: slideInDownOutDown;
   animation-name: slideInDownOutDown;
 }
@@ -3554,6 +3534,7 @@
   animation-name: slideInDownOutDown;
 }
 .animated {
+ 
   -webkit-animation-duration: 3s;
   animation-duration: 3s;
   -webkit-animation-fill-mode: both;

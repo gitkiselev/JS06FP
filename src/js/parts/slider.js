@@ -22,7 +22,7 @@ function slider(){
 	    
 	    
 	    slides[slideIndex - 1].style.display = 'block';
-	    slides[slideIndex - 1].classList.add('animated', 'slideInDownOutDown');
+	    //slides[slideIndex - 1].classList.add('animated', 'slideInDownOutDown');
 	    	  
 	}//showSlides
 	function plusSlides(n){

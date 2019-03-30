@@ -592,8 +592,16 @@ function expansion() {
 
   function showHiddenBlocksFunc() {
     for (var i = 0; i < showHiddenBlocks.length; i++) {
-      var showHiddenBlock = showHiddenBlocks[i];
-      showHiddenBlock.classList.remove('hidden-lg', 'hidden-md', 'hidden-sm', 'hidden-xs');
+      var showHiddenBlock = showHiddenBlocks[i]; //showHiddenBlock.classList.toggle('hidden-lg', 'hidden-md', 'hidden-sm', 'hidden-xs', 'col-sm-3', 'col-sm-offset-0', 'col-xs-10', 'col-xs-offset-1');
+
+      showHiddenBlock.classList.toggle('hidden-lg');
+      showHiddenBlock.classList.toggle('hidden-md');
+      showHiddenBlock.classList.toggle('hidden-sm');
+      showHiddenBlock.classList.toggle('hidden-xs');
+      showHiddenBlock.classList.toggle('col-sm-3');
+      showHiddenBlock.classList.toggle('col-sm-offset-0');
+      showHiddenBlock.classList.toggle('col-xs-10');
+      showHiddenBlock.classList.toggle('col-xs-offset-1');
     }
 
     moreBtn.style.display = 'none';

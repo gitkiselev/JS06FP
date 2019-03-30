@@ -179,7 +179,7 @@ function calc() {
       selectMaterial = document.getElementById('material'),
       selectOptions = document.getElementById('options'),
       promocode = document.getElementsByClassName('promocode')[0],
-      totalValue = document.getElementsByClassName('calc-price ')[0],
+      totalValue = document.getElementsByClassName('calc-price')[0],
       total = 0;
   selectSize.addEventListener('change', function () {
     total = Math.round(selectSize.value * selectMaterial.value * selectOptions.value * 1500);
@@ -226,7 +226,7 @@ function calc() {
     if (selectSize.value === '' || selectMaterial.value === '') {
       totalValue.innerHTML = 'Для расчета нужно выбрать размер картины и материал картины';
     } else {
-      if (promocode.value == 'IWANTPOPART') {
+      if (promocode.value.trim() == 'IWANTPOPART') {
         totalValue.innerHTML = total - total * 0.3;
       } else {
         totalValue.innerHTML = total;

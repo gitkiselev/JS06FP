@@ -251,6 +251,10 @@ __webpack_require__.r(__webpack_exports__);
 function consultation() {
   console.log('consultation');
   var giftModal = document.querySelector('.popup-gift'),
+      form = document.querySelector('.form'),
+      allInputs = form.elements,
+      nameConsForm = document.getElementById('nameConsForm'),
+      phoneConsForm = document.getElementById('phoneConsForm'),
       popupDesignOverlay = document.querySelector('.popup-design'),
       //overlay
   btnsPopupClose = document.querySelectorAll('.popup-close'),
@@ -262,6 +266,46 @@ function consultation() {
       showPopupConsultation();
     }
   });
+
+  var clearInputs = function clearInputs() {
+    for (var i = 0; i < allInputs.length; i++) {
+      var input = allInputs[i];
+      input.value = '';
+    }
+  };
+
+  function allowRusWords() {
+    console.log('typing name');
+    var regexp = /[^А-ЯЁ\s][^\s]/igm;
+    this.value = this.value.replace(regexp, '');
+  }
+
+  function setCursorPosition(pos, elem) {
+    elem.focus();
+    if (elem.setSelectionRange) elem.setSelectionRange(pos, pos);else if (elem.createTextRange) {
+      var range = elem.createTextRange();
+      range.collapse(true);
+      range.moveEnd("character", pos);
+      range.moveStart("character", pos);
+      range.select();
+    }
+  }
+
+  function mask() {
+    var matrix = this.defaultValue,
+        i = 0,
+        def = matrix.replace(/\D/g, ""),
+        val = this.value.replace(/\D/g, "");
+    def.length >= val.length && (val = def);
+    matrix = matrix.replace(/[_\d]/g, function (a) {
+      return val.charAt(i++) || "_";
+    });
+    this.value = matrix;
+    i = matrix.lastIndexOf(val.substr(-1));
+    i < matrix.length && matrix != this.defaultValue ? i++ : i = matrix.indexOf("_");
+    setCursorPosition(i, this);
+  }
+
   popupConsultation.addEventListener('click', hidePopupModalConsultation);
 
   function hidePopupModalConsultation(e) {
@@ -298,6 +342,28 @@ function consultation() {
       document.body.style.overflow = 'hidden';
     }
   }
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    designForm.appendChild(statusMessageDF); //AJAX for contact form
+
+    var request = new XMLHttpRequest();
+    request.open("POST", "./server.php");
+    request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    request.send(formDataDF);
+
+    request.onreadystatechange = function () {
+      if (request.status === 200 && request.status < 300) {
+        popupOk.style.display = 'block';
+      } else {
+        popupError.style.display = 'block';
+      }
+    };
+
+    clearInputs();
+  });
+  phoneConsForm.addEventListener("input", mask, false);
+  nameConsForm.addEventListener('input', allowRusWords);
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (consultation);
@@ -320,13 +386,9 @@ function design() {
       console.log(e.target);
       showPopupDesign();
     }
-  }); //popup design
-  //let btnsDesign         = document.getElementsByClassName('button-design');
-
-  var btnsPopupClose = document.querySelectorAll('.popup-close'); //X
-
-  var popupDesignOverlay = document.querySelector('.popup-design'); //overlay
-  //closing popup by clicking on overlay
+  });
+  var btnsPopupClose = document.querySelectorAll('.popup-close'),
+      popupDesignOverlay = document.querySelector('.popup-design'); //closing popup by clicking on overlay
 
   popupDesignOverlay.addEventListener('click', hidePopupModal); //Функции закрытия модальных окон
 
@@ -367,6 +429,13 @@ function design() {
       designForm = document.forms[0],
       formDFInput = document.querySelectorAll("input, textarea");
 
+  var clearInputs = function clearInputs() {
+    for (var _i2 = 0; _i2 < formDFInput.length; _i2++) {
+      var input = formDFInput[_i2];
+      input.value = '';
+    }
+  };
+
   var hidePopupModalSuccess = function hidePopupModalSuccess(e) {
     console.log('modal success closed');
 
@@ -385,60 +454,6 @@ function design() {
     }
   };
 
-  function allowRusWords() {
-    console.log('typing name');
-    var regexp = /[^А-ЯЁ\s][^\s]/igm;
-    this.value = this.value.replace(regexp, '');
-  }
-
-  function allowRusSentences() {
-    console.log('typing comment');
-    var regexp = /[^А-ЯЁ\s,\.!?][^\s]/igm;
-    this.value = this.value.replace(regexp, '');
-  }
-
-  function allowEmail() {
-    console.log('typing email');
-    var regexp = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,3})$/;
-
-    if (this.value.match(regexp)) {
-      return true;
-    } else {
-      alert('Неверный email');
-      var mes = document.createElement('div');
-      mes.innerHTML = 'Неверный email';
-      popupDesignOverlay.appendChild(mes); //this.value = '';
-
-      return false;
-    }
-  }
-
-  function setCursorPosition(pos, elem) {
-    elem.focus();
-    if (elem.setSelectionRange) elem.setSelectionRange(pos, pos);else if (elem.createTextRange) {
-      var range = elem.createTextRange();
-      range.collapse(true);
-      range.moveEnd("character", pos);
-      range.moveStart("character", pos);
-      range.select();
-    }
-  }
-
-  function mask() {
-    var matrix = this.defaultValue,
-        i = 0,
-        def = matrix.replace(/\D/g, ""),
-        val = this.value.replace(/\D/g, "");
-    def.length >= val.length && (val = def);
-    matrix = matrix.replace(/[_\d]/g, function (a) {
-      return val.charAt(i++) || "_";
-    });
-    this.value = matrix;
-    i = matrix.lastIndexOf(val.substr(-1));
-    i < matrix.length && matrix != this.defaultValue ? i++ : i = matrix.indexOf("_");
-    setCursorPosition(i, this);
-  }
-
   phoneDF.addEventListener("input", mask, false);
   nameDF.addEventListener('input', allowRusWords);
   commentDF.addEventListener('input', allowRusSentences);
@@ -453,31 +468,21 @@ function design() {
   var formDataDF = new FormData(designForm);
   designForm.addEventListener("submit", function (e) {
     e.preventDefault();
-    designForm.appendChild(statusMessageDF); //AJAX for contact form
-
     var request = new XMLHttpRequest();
-    request.open("POST", "server.php");
+    request.open("POST", "./server.php");
     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     request.send(formDataDF);
 
     request.onreadystatechange = function () {
       if (request.status === 200 && request.status < 300) {
-        statusMessage.innerHTML = message.success; //можно  добавлять контент
-
-        popupDesignOverlay.style.display = 'none';
         popupOk.style.display = 'block';
       } else {
-        contentDF.innerHTML = message.failure;
-        popupDesignOverlay.style.display = 'none';
         popupError.style.display = 'block';
       }
     };
 
-    for (var _i2 = 0; _i2 < formDFInput.length; _i2++) {
-      formDFInput[_i2].value = ""; // ощищаем поля ввода
-    }
+    clearInputs();
   });
-  designForm = document.forms[0], formDFInput = document.querySelectorAll("input, textarea");
 
   function allowRusWords() {
     console.log('typing name');
@@ -661,12 +666,14 @@ function filter() {
 __webpack_require__.r(__webpack_exports__);
 function form() {
   console.log('form');
-  var mainForm = document.getElementsByName('form')[2];
-  var allInputs = mainForm.getElementsByName('input');
-  var nameMainForm = document.getElementById('nameMainForm');
-  var phoneMainForm = document.getElementById('phoneMainForm');
-  var emailMainForm = document.getElementById('emailMainForm');
-  var textMainForm = document.getElementById('textMainForm');
+  var popupOk = document.querySelector('.popup-ok'),
+      popupError = document.querySelector('.popup-error'),
+      mainForm = document.getElementById('mainForm'),
+      allInputs = mainForm.elements,
+      nameMainForm = document.getElementById('nameMainForm'),
+      phoneMainForm = document.getElementById('phoneMainForm'),
+      emailMainForm = document.getElementById('emailMainForm'),
+      textMainForm = document.getElementById('textMainForm');
 
   var clearInputs = function clearInputs() {
     for (var i = 0; i < allInputs.length; i++) {
@@ -694,11 +701,6 @@ function form() {
     if (this.value.match(regexp)) {
       return true;
     } else {
-      alert('Неверный email');
-      var mes = document.createElement('div');
-      mes.innerHTML = 'Неверный email';
-      popupDesignOverlay.appendChild(mes); //this.value = '';
-
       return false;
     }
   }
@@ -729,6 +731,31 @@ function form() {
     setCursorPosition(i, this);
   }
 
+  var message = new Object();
+  message.loading = "Загрузка...";
+  message.success = "Спасибо! Скоро мы с вами свяжемся";
+  message.failure = "Недостаточно данных";
+  var statusMessage = document.createElement("div");
+  statusMessage.classList.add("status");
+  var formDataMainForm = new FormData(mainForm);
+  mainForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    mainForm.appendChild(statusMessage);
+    var request = new XMLHttpRequest();
+    request.open("POST", "./server.php");
+    request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    request.send(formDataMainForm);
+
+    request.onreadystatechange = function () {
+      if (request.status === 200 && request.status < 300) {
+        popupOk.style.display = 'block';
+      } else {
+        popupError.style.display = 'block';
+      }
+    };
+
+    clearInputs();
+  });
   phoneMainForm.addEventListener("input", mask, false);
   nameMainForm.addEventListener('input', allowRusWords);
   textMainForm.addEventListener('input', allowRusSentences);
@@ -752,6 +779,7 @@ function gift() {
   console.log('gift');
   var giftModal = document.querySelector('.popup-gift'),
       closeGift = giftModal.querySelector('.popup-close'),
+      popupGift = document.querySelector('.popup-gift'),
       gift = document.querySelector('.fixed-gift'),
       isClicked = false,
       allBtns = document.querySelectorAll('button');
@@ -772,15 +800,17 @@ function gift() {
 
   gift.addEventListener('click', showGiftModal);
 
-  var hidePopupModalGift = function hidePopupModalGift() {
-    giftModal.style.display = 'none';
-    document.body.style.overflow = '';
-  };
+  function hidePopupGift(e) {
+    if (e.target.classList.contains('popup-gift') || e.target.classList.contains('popup-close')) {
+      giftModal.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+  }
 
-  closeGift.addEventListener('click', function () {
-    hidePopupModalGift();
+  closeGift.addEventListener('click', function (e) {
+    hidePopupGift(e);
   });
-  giftModal.addEventListener('click', hidePopupModalGift);
+  popupGift.addEventListener('click', hidePopupGift);
 
   var scroll = function scroll() {
     if (isClicked === false && window.pageYOffset + window.innerHeight >= document.body.scrollHeight - 100) {

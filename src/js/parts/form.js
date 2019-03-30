@@ -1,11 +1,13 @@
 function form(){
 	console.log('form');
-	let mainForm = document.getElementsByName('form')[2];
-	let allInputs = mainForm.getElementsByName('input');
-	let nameMainForm = document.getElementById('nameMainForm');
-	let phoneMainForm = document.getElementById('phoneMainForm');
-	let emailMainForm = document.getElementById('emailMainForm');
-	let textMainForm = document.getElementById('textMainForm');
+	let popupOk    = document.querySelector('.popup-ok'),
+					popupError = document.querySelector('.popup-error'),
+	    mainForm = document.getElementById('mainForm'),
+	    allInputs = mainForm.elements,
+	    nameMainForm = document.getElementById('nameMainForm'),
+	    phoneMainForm = document.getElementById('phoneMainForm'),
+	    emailMainForm = document.getElementById('emailMainForm'),
+	    textMainForm = document.getElementById('textMainForm');
 	let clearInputs = () => {
 		for (let i = 0; i < allInputs.length; i++) {
 			let input = allInputs[i];
@@ -29,13 +31,7 @@ function form(){
 		if(this.value.match(regexp)){
 			return true;
 		} else {
-			alert('Неверный email');
-			let mes = document.createElement('div');
-			mes.innerHTML = 'Неверный email';
-			popupDesignOverlay.appendChild(mes);
-			//this.value = '';
 			return false;
-
 		}
 	}
 
@@ -65,6 +61,35 @@ function mask() {
 		i < matrix.length && matrix != this.defaultValue ? i++ : i = matrix.indexOf("_");
 		setCursorPosition(i, this)
 }
+let message = new Object();
+	message.loading = "Загрузка...";
+	message.success = "Спасибо! Скоро мы с вами свяжемся";
+	message.failure = "Недостаточно данных";
+
+	let statusMessage = document.createElement("div");
+	statusMessage.classList.add("status");
+let formDataMainForm = new FormData(mainForm);
+mainForm.addEventListener("submit", function(e) {
+	e.preventDefault();
+	mainForm.appendChild(statusMessage);
+	
+	let request = new XMLHttpRequest();
+	request.open("POST", "./server.php");
+	request.setRequestHeader(
+			"Content-Type",
+			"application/x-www-form-urlencoded"
+	);
+	request.send(formDataMainForm);
+	
+	request.onreadystatechange = function() {
+			if (request.status === 200 && request.status < 300) {
+							popupOk.style.display = 'block';
+					} else {
+							popupError.style.display = 'block';
+					}
+	};
+	clearInputs();
+});
 					phoneMainForm.addEventListener("input", mask, false)
 	    nameMainForm.addEventListener('input', allowRusWords);
 	    textMainForm.addEventListener('input', allowRusSentences);

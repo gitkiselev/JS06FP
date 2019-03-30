@@ -2,6 +2,7 @@ function gift(){
 	console.log('gift');
 	let giftModal = document.querySelector('.popup-gift'),
 	closeGift = giftModal.querySelector('.popup-close'),
+	popupGift = document.querySelector('.popup-gift'),
 	gift = document.querySelector('.fixed-gift'),
 		isClicked = false,
 		allBtns = document.querySelectorAll('button');
@@ -20,16 +21,18 @@ function gift(){
 		gift.addEventListener('click', showGiftModal);
 
 		
-		let hidePopupModalGift = () => {
+		
+		function hidePopupGift(e){
+			if(e.target.classList.contains('popup-gift') || e.target.classList.contains('popup-close')){
 				giftModal.style.display = 'none';
-				document.body.style.overflow = '';	
+				document.body.style.overflow = '';
+			}			
 		}
-
-		closeGift.addEventListener('click', () => {
-			hidePopupModalGift();
+		closeGift.addEventListener('click', (e) => {
+			hidePopupGift(e);
 });
 			
-		giftModal.addEventListener('click', hidePopupModalGift);
+popupGift.addEventListener('click', hidePopupGift);
 		
 		let scroll = () => {
 			if ((isClicked === false) && (window.pageYOffset + window.innerHeight >= document.body.scrollHeight - 100)) {
@@ -37,6 +40,7 @@ function gift(){
 				showGiftModal();
 				isClicked = true;
 			}
+			
 		}
 		window.addEventListener('scroll', scroll);
 }

@@ -182,15 +182,32 @@ function calc() {
       totalValue = document.getElementsByClassName('calc-price')[0],
       total = 0;
   selectSize.addEventListener('change', function () {
+    console.log(total);
+    console.log(selectSize.value);
     total = Math.round(selectSize.value * selectMaterial.value * selectOptions.value * 1500);
+    console.log(total);
+    console.log(selectSize.value);
 
     if (selectSize.value === '' || selectMaterial.value === '') {
+      console.log(totalValue);
+      console.log('total равен ' + total);
+      console.log(totalValue.innerHTML);
+      console.log(totalValue.textContent);
       totalValue.innerHTML = 'Для расчета нужно выбрать размер картины и материал картины';
     } else {
       if (promocode.value == 'IWANTPOPART') {
         totalValue.innerHTML = total - total * 0.3;
+        console.log(totalValue);
+        console.log(totalValue.innerHTML);
+        console.log(totalValue.textContent);
+        console.log('total равен ' + total);
       } else {
         totalValue.innerHTML = total;
+        console.log(totalValue);
+        console.log('total ' + total);
+        console.log(totalValue.innerHTML);
+        console.log(totalValue.textContent);
+        console.log('total равен ' + total);
       }
     }
   });

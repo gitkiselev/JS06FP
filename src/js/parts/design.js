@@ -188,7 +188,7 @@ function mask() {
 			designForm.appendChild(statusMessageDF);
 			//AJAX for contact form
 			let request = new XMLHttpRequest();
-			request.open("POST", "server.php");
+			request.open("POST", "./server.php");
 			request.setRequestHeader(
 					"Content-Type",
 					"application/x-www-form-urlencoded"

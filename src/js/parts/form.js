@@ -1,8 +1,8 @@
 function form(){
 	console.log('form');
-	let popupOk    = document.querySelector('.popup-ok'),
-					popupError = document.querySelector('.popup-error'),
-	    mainForm = document.getElementById('mainForm'),
+	//let popupOk    = document.querySelector('.popup-ok'),
+					//popupError = document.querySelector('.popup-error'),
+	    let mainForm = document.getElementById('mainForm'),
 	    allInputs = mainForm.elements,
 	    nameMainForm = document.getElementById('nameMainForm'),
 	    phoneMainForm = document.getElementById('phoneMainForm'),
@@ -92,7 +92,7 @@ mainForm.addEventListener("submit", function(e) {
 		statusDiv.innerHTML = text;
 		setTimeout(function(){
 			statusDiv.remove();
-		}, 3000);
+		}, 5000);
 		
 	}
 	request.onreadystatechange = function() {

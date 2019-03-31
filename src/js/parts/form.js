@@ -43,7 +43,7 @@ function form(){
 						range.collapse(true);
 						range.moveEnd("character", pos);
 						range.moveStart("character", pos);
-						range.select()
+						range.select();
 		}
 }
 
@@ -66,13 +66,15 @@ let message = new Object();
 	message.success = "Спасибо! Скоро мы с вами свяжемся";
 	message.failure = "Недостаточно данных";
 
+	
+ mainForm.addEventListener("submit", function(e) {
+	e.preventDefault();
+	
 	let statusMessage = document.createElement("div");
 	statusMessage.classList.add("status");
-let formDataMainForm = new FormData(mainForm);
-mainForm.addEventListener("submit", function(e) {
-	e.preventDefault();
 	mainForm.appendChild(statusMessage);
-	
+
+ let formDataMainForm = new FormData(mainForm);
 	let request = new XMLHttpRequest();
 	request.open("POST", "./server.php");
 	request.setRequestHeader(

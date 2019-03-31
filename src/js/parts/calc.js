@@ -2,7 +2,9 @@ function calc() {
 
 	let selectSize = document.getElementById('size'),
 					calcForm = document.querySelector('.calc'),
-					calcSubmitBtn = calcForm.querySelector('button'),
+					allInputs = calcForm.elements,
+					//calcSubmitBtn = calcForm.querySelector('button'),
+					calcBtn = document.getElementById('calcBtn'),
 					selectMaterial = document.getElementById('material'),
 					selectOptions = document.getElementById('options'),
 					promocode = document.getElementsByClassName('promocode')[0],
@@ -10,31 +12,19 @@ function calc() {
 					total = 0;
 
 	selectSize.addEventListener('change', function() {
-		console.log(total);
-		console.log(selectSize.value);
+		
 					total = Math.round((selectSize.value * selectMaterial.value * selectOptions.value) * 1500);
-					console.log(total);
-					console.log(selectSize.value);
+					
 					if (selectSize.value === '' || selectMaterial.value === '') {
-						console.log(totalValue);
-						console.log('total равен ' + total);
-						console.log(totalValue.innerHTML);
-						console.log(totalValue.textContent);
+					
 									totalValue.innerHTML = 'Для расчета нужно выбрать размер картины и материал картины';
 					} else {
 									if (promocode.value == 'IWANTPOPART') {
 													totalValue.innerHTML = total - (total * 0.3);
-													console.log(totalValue);
-						console.log(totalValue.innerHTML);
-						console.log(totalValue.textContent);
-						console.log('total равен ' +total);
+													
 									} else {
 													totalValue.innerHTML = total;
-													console.log(totalValue);
-													console.log('total '+ total);
-						console.log(totalValue.innerHTML);
-						console.log(totalValue.textContent);
-						console.log('total равен ' +total);
+												
 									}
 					}
 	});
@@ -79,15 +69,82 @@ function calc() {
 					}
 
 	});
-	calcSubmitBtn.disabled = true;
-	calcSubmitBtn.addEventListener('click', function(){
+	
+	let div = document.createElement('div');
+	div.classList.add('status');
+	let statusDiv = document.getElementsByClassName('status')[0];
+	statusDiv.style.textAlign = 'center';
+	function submitMessage(text){
+				statusDiv.innerHTML = text;
+				setTimeout(function(){
+					statusDiv.remove();
+				}, 5000);
+			}
+
+	let clearInputs = () => {
+		// for (let i = 0; i < allInputs.length; i++) {
+		// 	let input = allInputs[i];
+		// 	input.value = '';
+		// 	totalValue.innerHTML = 'Для расчета нужно выбрать размер картины и материал картины';
+		// }
+		//calcForm.reset();
+	}
+	let message = new Object();
+	message.loading = "Загрузка...";
+	message.success = "Спасибо! Скоро мы с вами свяжемся";
+	message.failure = "Недостаточно данных";
+	calcBtn.addEventListener('click', function(e){
+	
+		e.preventDefault();
 		if(selectSize.value !== '' || selectMaterial.value !== ''){
-			calcSubmitBtn.disabled == false;
-			alert('Спасибо за заказ!');
+			
+			submitMessage(message.success);
+			clearInputs();
 		} else {
-			calcSubmitBtn.disabled = true;
+			clearInputs();
+			submitMessage(message.failure);
 		}
 	});
+
+	// let calculatorForm = document.getElementById('calcForm');
+	// let allInputs = calculatorForm.elements;
+	// calculatorForm.addEventListener("submit", function(e) {
+	// 	e.preventDefault();
+		
+	// 	let statusMessage = document.createElement("div");
+	// 	statusMessage.classList.add("status");
+	// 	mainForm.appendChild(statusMessage);
+	
+	// 	let calcFormData = new FormData(calcForm);
+	// 	let request = new XMLHttpRequest();
+	// 	request.open("POST", "./server.php");
+	// 	request.setRequestHeader(
+	// 			"Content-Type",
+	// 			"application/x-www-form-urlencoded"
+	// 	);
+	// 	request.send(calcFormData);
+		
+	// 	let div = document.createElement('div');
+	// 	div.classList.add('status');
+	// 	let statusDiv = document.getElementsByClassName('status')[0];
+	// 	statusDiv.style.textAlign = 'center';
+	// 	function submitMessage(text){
+	// 		statusDiv.innerHTML = text;
+	// 		setTimeout(function(){
+	// 			statusDiv.remove();
+	// 		}, 5000);
+			
+	// 	}
+	// 	request.onreadystatechange = function() {
+			
+	// 			if (request.status === 200 && request.status < 300) {
+	// 							submitMessage(message.success);
+	// 					} else {
+	// 						submitMessage(message.failure);
+	// 					}
+	// 	};
+	// 	clearInputs();
+	// });
 }
 
 export default calc;

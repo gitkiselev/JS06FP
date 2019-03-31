@@ -246,7 +246,7 @@
 			<h2>Рассчитайте стоимость и получите скидку 30%</h2>
 			<div class=row>
 				<div class="col-md-4 col-offset-1">
-					<form class=form action="#" method="POST" enctype="multipart/form-data">
+					<form id="calcForm" class=form action="#" method="POST" enctype="multipart/form-data">
 						<h4>Загрузите свое фото</h4>
 						<div class=file_upload>
 							<button type=button>Загрузить фотографию</button>
@@ -274,7 +274,7 @@
 						</select>
 						<input type="text" class="promocode" placeholder="Введите ваш промокод">
 						<div class="calc-price">Для расчета нужно выбрать размер картины и материал картины</div>
-						<button class="button button-order">Быстрый заказ</button>
+						<button id="calcBtn" class="button button-order">Быстрый заказ</button>
 					</form>
 				</div>
 				<div class="col-md-4 col-md-offset-2 hidden-sm hidden-xs">
@@ -611,7 +611,7 @@
 			<p class=p-heading>Остались вопросы?</p>
 			<h2>Получите консультацию художника!</h2>
 			<div class="col-md-10 col-md-offset-1">
-				<form id="mainForm" action="./server.php" method="POST">
+				<form id="mainForm" action="./server.php" method="POST" enctype="multipart/form-data">
 					<div class=input-wrapper>
 						<input id="nameMainForm" type=text name=name placeholder="Ваше имя" required>
 						<input id="phoneMainForm" type=text value="+7(___)___-____" name=phone placeholder="Ваш телефон" required>
@@ -680,7 +680,7 @@
 				<button class=popup-close>&times;</button>
 				<h4>Остались вопросы? Закажите обратный звонок</h4>
 				<div class=main-form>
-					<form class="form"  action="./server.php" method="POST">
+					<form id="consForm" class="form"  action="./server.php" method="POST" enctype="multipart/form-data">
 						<input id="nameConsForm"type=text name=name placeholder="Ваше имя" required>
 						<input id="phoneConsForm" type=text value="+7(___)___-____" name="phone" placeholder="Ваш телефон" required>
 						<button class="button button-order">Получить консультацию</button>

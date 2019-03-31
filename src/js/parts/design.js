@@ -36,8 +36,8 @@ function design(){
 			let popupDialog = popupsDialog[i];
 			popupDialog.style.display = 'block';
 		}
-		let popupDesignModal = document.querySelector('.popup-design');
-		popupDesignModal.style.display = 'block';
+		
+		popupDesignOverlay.style.display = 'block';
 		
 		document.body.style.overflow = 'hidden';
 	}
@@ -48,9 +48,10 @@ function design(){
      phoneDF    = document.querySelector('.phoneDF'),
 					emailDF    = document.querySelector('#emailDF'),
 					
-     designForm = document.forms[0],
+     designForm = document.getElementById('myform'),
 	
-	    formDFInput = document.querySelectorAll("input, textarea");
+					
+					formDFInput = designForm.elements;
 					let clearInputs = () => {
 						for (let i = 0; i < formDFInput.length; i++) {
 							let input = formDFInput[i];
@@ -75,28 +76,20 @@ function design(){
 	}
 	
 	
-
-	
-
-
-					phoneDF.addEventListener("input", mask, false)
-	    nameDF.addEventListener('input', allowRusWords);
-	    commentDF.addEventListener('input', allowRusSentences);
-	    emailDF.addEventListener('blur', allowEmail);
-
+					
 	//Скрипт к форме дизайн портрета
 	let message = new Object();
 	message.loading = "Загрузка...";
 	message.success = "Спасибо! Скоро мы с вами свяжемся";
 	message.failure = "Недостаточно данных";
 
-	let statusMessageDF = document.createElement("div");
-	statusMessageDF.classList.add("status");
-let formDataDF = new FormData(designForm);
+	
 
 	designForm.addEventListener("submit", function(e) {
 			e.preventDefault();
-			
+			let statusMessageDF = document.createElement("div");
+	statusMessageDF.classList.add("status");
+let formDataDF = new FormData(designForm);
 			
 			let request = new XMLHttpRequest();
 			request.open("POST", "./server.php");
@@ -108,8 +101,10 @@ let formDataDF = new FormData(designForm);
 			
 			request.onreadystatechange = function() {
 				if (request.status === 200 && request.status < 300) {
+							popupDesignOverlay.style.display = 'none';
 								popupOk.style.display = 'block';
 						} else {
+							popupDesignOverlay.style.display = 'none';
 								popupError.style.display = 'block';
 						}
 		};
@@ -117,12 +112,6 @@ let formDataDF = new FormData(designForm);
 	});
 	
 
-					
-     
-
-	
-
-	
 	
 	function allowRusWords(){
 		console.log('typing name');
@@ -178,40 +167,6 @@ function mask() {
 		setCursorPosition(i, this)
 }
 
-
-	
-
-	
-
-	designForm.addEventListener("submit", function(e) {
-			e.preventDefault();
-			designForm.appendChild(statusMessageDF);
-			//AJAX for contact form
-			let request = new XMLHttpRequest();
-			request.open("POST", "./server.php");
-			request.setRequestHeader(
-					"Content-Type",
-					"application/x-www-form-urlencoded"
-			);
-			request.send(formDataDF);
-			
-			request.onreadystatechange = function() {
-					if (request.status === 200 && request.status < 300) {
-								
-									//statusMessage.innerHTML = message.success;
-									//можно  добавлять контент
-									popupDesignOverlay.style.display = 'none';
-									popupOk.style.display = 'block';
-							} else {
-									///contentDF.innerHTML = message.failure;
-									popupDesignOverlay.style.display = 'none';
-									popupError.style.display = 'block';
-							}
-			};
-			for (let i = 0; i < formDFInput.length; i++) {
-					formDFInput[i].value = ""; // ощищаем поля ввода
-			}
-	});
 	phoneDF.addEventListener("input", mask, false);
 	nameDF.addEventListener('input', allowRusWords);
 	commentDF.addEventListener('input', allowRusSentences);

@@ -1,8 +1,9 @@
 function consultation(){
 	console.log('consultation');
 	let giftModal = document.querySelector('.popup-gift'),
-	form = document.querySelector('.form'),
-	allInputs = form.elements,
+	//form = document.querySelector('.form'),
+	consForm = document.getElementById('consForm'),
+	allInputs = consForm.elements,
 	nameConsForm = document.getElementById('nameConsForm'),
 	phoneConsForm = document.getElementById('phoneConsForm'),
 	popupDesignOverlay = document.querySelector('.popup-design'),//overlay
@@ -88,34 +89,42 @@ function openModal() {
 					document.body.style.overflow = 'hidden';
 	}
 }
-let formDataCons = new FormData(form);
-form.addEventListener("submit", function(e) {
-	e.preventDefault();
-	//form.appendChild(statusMessage);
-	//AJAX for contact form
-	let request = new XMLHttpRequest();
-	request.open("POST", "./server.php");
-	request.setRequestHeader(
-			"Content-Type",
-			"application/x-www-form-urlencoded"
-	);
-	request.send(formDataCons);
-	
-	request.onreadystatechange = function() {
-		if (request.status === 200 && request.status < 300) {
-						popupOk.style.display = 'block';
-				} else {
-						popupError.style.display = 'block';
-				}
-};
-	clearInputs();
+
+
+let message = new Object();
+	message.loading = "Загрузка...";
+	message.success = "Спасибо! Скоро мы с вами свяжемся";
+	message.failure = "Недостаточно данных";
+
+
+
+
+	consForm.addEventListener("submit", function(e) {
+		e.preventDefault();
+		let statusMessageCons = document.createElement("div");
+statusMessageCons.classList.add("status");
+let formDataCons = new FormData(consForm);
+		
+		let request = new XMLHttpRequest();
+		request.open("POST", "./server.php");
+		request.setRequestHeader(
+				"Content-Type",
+				"application/x-www-form-urlencoded"
+		);
+		request.send(formDataCons);
+		
+		request.onreadystatechange = function() {
+			if (request.status === 200 && request.status < 300) {
+						popupConsultation.style.display = 'none';
+							popupOk.style.display = 'block';
+					} else {
+						popupConsultation.style.display = 'none';
+							popupError.style.display = 'block';
+					}
+	};
+		clearInputs(); 
 });
-
 phoneConsForm.addEventListener("input", mask, false);
-	nameConsForm.addEventListener('input', allowRusWords);
-
-
-
-
+nameConsForm.addEventListener('input', allowRusWords);
 }
 export default  consultation;

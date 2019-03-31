@@ -228,39 +228,24 @@ __webpack_require__.r(__webpack_exports__);
 function calc() {
   var selectSize = document.getElementById('size'),
       calcForm = document.querySelector('.calc'),
-      calcSubmitBtn = calcForm.querySelector('button'),
+      allInputs = calcForm.elements,
+      //calcSubmitBtn = calcForm.querySelector('button'),
+  calcBtn = document.getElementById('calcBtn'),
       selectMaterial = document.getElementById('material'),
       selectOptions = document.getElementById('options'),
       promocode = document.getElementsByClassName('promocode')[0],
       totalValue = document.getElementsByClassName('calc-price')[0],
       total = 0;
   selectSize.addEventListener('change', function () {
-    console.log(total);
-    console.log(selectSize.value);
     total = Math.round(selectSize.value * selectMaterial.value * selectOptions.value * 1500);
-    console.log(total);
-    console.log(selectSize.value);
 
     if (selectSize.value === '' || selectMaterial.value === '') {
-      console.log(totalValue);
-      console.log('total равен ' + total);
-      console.log(totalValue.innerHTML);
-      console.log(totalValue.textContent);
       totalValue.innerHTML = 'Для расчета нужно выбрать размер картины и материал картины';
     } else {
       if (promocode.value == 'IWANTPOPART') {
         totalValue.innerHTML = total - total * 0.3;
-        console.log(totalValue);
-        console.log(totalValue.innerHTML);
-        console.log(totalValue.textContent);
-        console.log('total равен ' + total);
       } else {
         totalValue.innerHTML = total;
-        console.log(totalValue);
-        console.log('total ' + total);
-        console.log(totalValue.innerHTML);
-        console.log(totalValue.textContent);
-        console.log('total равен ' + total);
       }
     }
   });
@@ -303,15 +288,74 @@ function calc() {
       }
     }
   });
-  calcSubmitBtn.disabled = true;
-  calcSubmitBtn.addEventListener('click', function () {
+  var div = document.createElement('div');
+  div.classList.add('status');
+  var statusDiv = document.getElementsByClassName('status')[0];
+  statusDiv.style.textAlign = 'center';
+
+  function submitMessage(text) {
+    statusDiv.innerHTML = text;
+    setTimeout(function () {
+      statusDiv.remove();
+    }, 5000);
+  }
+
+  var clearInputs = function clearInputs() {// for (let i = 0; i < allInputs.length; i++) {
+    // 	let input = allInputs[i];
+    // 	input.value = '';
+    // 	totalValue.innerHTML = 'Для расчета нужно выбрать размер картины и материал картины';
+    // }
+    //calcForm.reset();
+  };
+
+  var message = new Object();
+  message.loading = "Загрузка...";
+  message.success = "Спасибо! Скоро мы с вами свяжемся";
+  message.failure = "Недостаточно данных";
+  calcBtn.addEventListener('click', function (e) {
+    e.preventDefault();
+
     if (selectSize.value !== '' || selectMaterial.value !== '') {
-      calcSubmitBtn.disabled == false;
-      alert('Спасибо за заказ!');
+      submitMessage(message.success);
+      clearInputs();
     } else {
-      calcSubmitBtn.disabled = true;
+      clearInputs();
+      submitMessage(message.failure);
     }
-  });
+  }); // let calculatorForm = document.getElementById('calcForm');
+  // let allInputs = calculatorForm.elements;
+  // calculatorForm.addEventListener("submit", function(e) {
+  // 	e.preventDefault();
+  // 	let statusMessage = document.createElement("div");
+  // 	statusMessage.classList.add("status");
+  // 	mainForm.appendChild(statusMessage);
+  // 	let calcFormData = new FormData(calcForm);
+  // 	let request = new XMLHttpRequest();
+  // 	request.open("POST", "./server.php");
+  // 	request.setRequestHeader(
+  // 			"Content-Type",
+  // 			"application/x-www-form-urlencoded"
+  // 	);
+  // 	request.send(calcFormData);
+  // 	let div = document.createElement('div');
+  // 	div.classList.add('status');
+  // 	let statusDiv = document.getElementsByClassName('status')[0];
+  // 	statusDiv.style.textAlign = 'center';
+  // 	function submitMessage(text){
+  // 		statusDiv.innerHTML = text;
+  // 		setTimeout(function(){
+  // 			statusDiv.remove();
+  // 		}, 5000);
+  // 	}
+  // 	request.onreadystatechange = function() {
+  // 			if (request.status === 200 && request.status < 300) {
+  // 							submitMessage(message.success);
+  // 					} else {
+  // 						submitMessage(message.failure);
+  // 					}
+  // 	};
+  // 	clearInputs();
+  // });
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (calc);
@@ -330,8 +374,9 @@ __webpack_require__.r(__webpack_exports__);
 function consultation() {
   console.log('consultation');
   var giftModal = document.querySelector('.popup-gift'),
-      form = document.querySelector('.form'),
-      allInputs = form.elements,
+      //form = document.querySelector('.form'),
+  consForm = document.getElementById('consForm'),
+      allInputs = consForm.elements,
       nameConsForm = document.getElementById('nameConsForm'),
       phoneConsForm = document.getElementById('phoneConsForm'),
       popupDesignOverlay = document.querySelector('.popup-design'),
@@ -424,11 +469,15 @@ function consultation() {
     }
   }
 
-  var formDataCons = new FormData(form);
-  form.addEventListener("submit", function (e) {
-    e.preventDefault(); //form.appendChild(statusMessage);
-    //AJAX for contact form
-
+  var message = new Object();
+  message.loading = "Загрузка...";
+  message.success = "Спасибо! Скоро мы с вами свяжемся";
+  message.failure = "Недостаточно данных";
+  consForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var statusMessageCons = document.createElement("div");
+    statusMessageCons.classList.add("status");
+    var formDataCons = new FormData(consForm);
     var request = new XMLHttpRequest();
     request.open("POST", "./server.php");
     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -436,8 +485,10 @@ function consultation() {
 
     request.onreadystatechange = function () {
       if (request.status === 200 && request.status < 300) {
+        popupConsultation.style.display = 'none';
         popupOk.style.display = 'block';
       } else {
+        popupConsultation.style.display = 'none';
         popupError.style.display = 'block';
       }
     };
@@ -497,8 +548,7 @@ function design() {
       popupDialog.style.display = 'block';
     }
 
-    var popupDesignModal = document.querySelector('.popup-design');
-    popupDesignModal.style.display = 'block';
+    popupDesignOverlay.style.display = 'block';
     document.body.style.overflow = 'hidden';
   }
 
@@ -508,8 +558,8 @@ function design() {
       commentDF = document.querySelector('#commentDF'),
       phoneDF = document.querySelector('.phoneDF'),
       emailDF = document.querySelector('#emailDF'),
-      designForm = document.forms[0],
-      formDFInput = document.querySelectorAll("input, textarea");
+      designForm = document.getElementById('myform'),
+      formDFInput = designForm.elements;
 
   var clearInputs = function clearInputs() {
     for (var _i2 = 0; _i2 < formDFInput.length; _i2++) {
@@ -534,22 +584,18 @@ function design() {
       popupError.style.display = 'none';
       document.body.style.overflow = '';
     }
-  };
+  }; //Скрипт к форме дизайн портрета
 
-  phoneDF.addEventListener("input", mask, false);
-  nameDF.addEventListener('input', allowRusWords);
-  commentDF.addEventListener('input', allowRusSentences);
-  emailDF.addEventListener('blur', allowEmail); //Скрипт к форме дизайн портрета
 
   var message = new Object();
   message.loading = "Загрузка...";
   message.success = "Спасибо! Скоро мы с вами свяжемся";
   message.failure = "Недостаточно данных";
-  var statusMessageDF = document.createElement("div");
-  statusMessageDF.classList.add("status");
-  var formDataDF = new FormData(designForm);
   designForm.addEventListener("submit", function (e) {
     e.preventDefault();
+    var statusMessageDF = document.createElement("div");
+    statusMessageDF.classList.add("status");
+    var formDataDF = new FormData(designForm);
     var request = new XMLHttpRequest();
     request.open("POST", "./server.php");
     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -557,8 +603,10 @@ function design() {
 
     request.onreadystatechange = function () {
       if (request.status === 200 && request.status < 300) {
+        popupDesignOverlay.style.display = 'none';
         popupOk.style.display = 'block';
       } else {
+        popupDesignOverlay.style.display = 'none';
         popupError.style.display = 'block';
       }
     };
@@ -620,32 +668,6 @@ function design() {
     setCursorPosition(i, this);
   }
 
-  designForm.addEventListener("submit", function (e) {
-    e.preventDefault();
-    designForm.appendChild(statusMessageDF); //AJAX for contact form
-
-    var request = new XMLHttpRequest();
-    request.open("POST", "./server.php");
-    request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    request.send(formDataDF);
-
-    request.onreadystatechange = function () {
-      if (request.status === 200 && request.status < 300) {
-        //statusMessage.innerHTML = message.success;
-        //можно  добавлять контент
-        popupDesignOverlay.style.display = 'none';
-        popupOk.style.display = 'block';
-      } else {
-        ///contentDF.innerHTML = message.failure;
-        popupDesignOverlay.style.display = 'none';
-        popupError.style.display = 'block';
-      }
-    };
-
-    for (var _i3 = 0; _i3 < formDFInput.length; _i3++) {
-      formDFInput[_i3].value = ""; // ощищаем поля ввода
-    }
-  });
   phoneDF.addEventListener("input", mask, false);
   nameDF.addEventListener('input', allowRusWords);
   commentDF.addEventListener('input', allowRusSentences);
@@ -825,12 +847,12 @@ function form() {
   message.loading = "Загрузка...";
   message.success = "Спасибо! Скоро мы с вами свяжемся";
   message.failure = "Недостаточно данных";
-  var statusMessage = document.createElement("div");
-  statusMessage.classList.add("status");
-  var formDataMainForm = new FormData(mainForm);
   mainForm.addEventListener("submit", function (e) {
     e.preventDefault();
+    var statusMessage = document.createElement("div");
+    statusMessage.classList.add("status");
     mainForm.appendChild(statusMessage);
+    var formDataMainForm = new FormData(mainForm);
     var request = new XMLHttpRequest();
     request.open("POST", "./server.php");
     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");

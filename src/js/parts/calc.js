@@ -1,8 +1,8 @@
 function calc() {
 
 	let selectSize = document.getElementById('size'),
-					calcForm = document.querySelector('.calc'),
-					allInputs = calcForm.elements,
+					calcForm = document.querySelector('#calcForm'),
+					//allInputs = calcForm.elements,
 					//calcSubmitBtn = calcForm.querySelector('button'),
 					calcBtn = document.getElementById('calcBtn'),
 					selectMaterial = document.getElementById('material'),
@@ -69,17 +69,19 @@ function calc() {
 					}
 
 	});
+	let message = new Object();
+	message.loading = "Загрузка...";
+	message.success = "Спасибо! Скоро мы с вами свяжемся";
+	message.failure = "Недостаточно данных";
+
 	
-	let div = document.createElement('div');
-	div.classList.add('status');
-	let statusDiv = document.getElementsByClassName('status')[0];
-	statusDiv.style.textAlign = 'center';
+
 	function submitMessage(text){
-				statusDiv.innerHTML = text;
-				setTimeout(function(){
-					statusDiv.remove();
-				}, 5000);
-			}
+		statusDiv.innerHTML = text;
+		setTimeout(function(){
+			statusDiv.remove();
+		}, 5000);
+	}
 
 	let clearInputs = () => {
 		// for (let i = 0; i < allInputs.length; i++) {
@@ -89,20 +91,27 @@ function calc() {
 		// }
 		//calcForm.reset();
 	}
-	let message = new Object();
-	message.loading = "Загрузка...";
-	message.success = "Спасибо! Скоро мы с вами свяжемся";
-	message.failure = "Недостаточно данных";
-	calcBtn.addEventListener('click', function(e){
 	
+	calcBtn.addEventListener('click', function(e){
+		let divc = document.createElement('div');
+		calcForm.appendChild(divc);
+		divc.style.textAlign = 'center';
 		e.preventDefault();
-		if(selectSize.value !== '' || selectMaterial.value !== ''){
-			
-			submitMessage(message.success);
+		if(selectSize.value !== '' && selectMaterial.value !== ''){
+		
+			divc.innerHTML = 'Спасибо! Скоро мы с вами свяжемся!';
+			setTimeout(function(){
+				divc.remove();
+			}, 5000);
+		//	submitMessage(message.success);
 			clearInputs();
 		} else {
-			clearInputs();
-			submitMessage(message.failure);
+		
+			divc.innerHTML = 'Недостаточно данных!';
+			setTimeout(function(){
+				divc.remove();
+			}, 5000);
+			//submitMessage(message.failure);
 		}
 	});
 

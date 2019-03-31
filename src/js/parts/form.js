@@ -86,6 +86,7 @@ let message = new Object();
 	message.loading = "Загрузка...";
 	message.success = "Спасибо! Скоро мы с вами свяжемся";
 	message.failure = "Недостаточно данных";
+
 	let div = document.createElement('div');
 	div.classList.add('status');
 	let statusDiv = document.getElementsByClassName('status')[0];
@@ -95,8 +96,9 @@ let message = new Object();
 		setTimeout(function(){
 			statusDiv.remove();
 		}, 5000);
-		
 	}
+
+	
 	request.onreadystatechange = function() {
 		
 

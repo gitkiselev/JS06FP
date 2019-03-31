@@ -227,9 +227,9 @@ function accordion() {
 __webpack_require__.r(__webpack_exports__);
 function calc() {
   var selectSize = document.getElementById('size'),
-      calcForm = document.querySelector('.calc'),
-      allInputs = calcForm.elements,
-      //calcSubmitBtn = calcForm.querySelector('button'),
+      calcForm = document.querySelector('#calcForm'),
+      //allInputs = calcForm.elements,
+  //calcSubmitBtn = calcForm.querySelector('button'),
   calcBtn = document.getElementById('calcBtn'),
       selectMaterial = document.getElementById('material'),
       selectOptions = document.getElementById('options'),
@@ -288,10 +288,10 @@ function calc() {
       }
     }
   });
-  var div = document.createElement('div');
-  div.classList.add('status');
-  var statusDiv = document.getElementsByClassName('status')[0];
-  statusDiv.style.textAlign = 'center';
+  var message = new Object();
+  message.loading = "Загрузка...";
+  message.success = "Спасибо! Скоро мы с вами свяжемся";
+  message.failure = "Недостаточно данных";
 
   function submitMessage(text) {
     statusDiv.innerHTML = text;
@@ -308,19 +308,24 @@ function calc() {
     //calcForm.reset();
   };
 
-  var message = new Object();
-  message.loading = "Загрузка...";
-  message.success = "Спасибо! Скоро мы с вами свяжемся";
-  message.failure = "Недостаточно данных";
   calcBtn.addEventListener('click', function (e) {
+    var divc = document.createElement('div');
+    calcForm.appendChild(divc);
+    divc.style.textAlign = 'center';
     e.preventDefault();
 
-    if (selectSize.value !== '' || selectMaterial.value !== '') {
-      submitMessage(message.success);
+    if (selectSize.value !== '' && selectMaterial.value !== '') {
+      divc.innerHTML = 'Спасибо! Скоро мы с вами свяжемся!';
+      setTimeout(function () {
+        divc.remove();
+      }, 5000); //	submitMessage(message.success);
+
       clearInputs();
     } else {
-      clearInputs();
-      submitMessage(message.failure);
+      divc.innerHTML = 'Недостаточно данных!';
+      setTimeout(function () {
+        divc.remove();
+      }, 5000); //submitMessage(message.failure);
     }
   }); // let calculatorForm = document.getElementById('calcForm');
   // let allInputs = calculatorForm.elements;

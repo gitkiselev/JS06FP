@@ -17,7 +17,7 @@ function design(){
 
 	//Функции закрытия модальных окон
 	function hidePopupModal(e){
-		console.log('modal design closed');
+		
 		if(e.target.classList.contains('popup-close') || e.target.classList.contains('popup-design')){
 			popupDesignOverlay.style.display = 'none';
 			document.body.style.overflow = '';
@@ -86,15 +86,10 @@ function design(){
 
 	let divDesign = document.createElement('div');
 	divDesign.classList.add('status1');
-	//let divCons = document.getElementsByClassName('status1')[0];
+	
 	divDesign.style.textAlign = 'center';
 
-	// function submitMessage(text){
-	// 	divDesign.innerHTML = text;
-	// 	setTimeout(function(){
-	// 		divDesign.remove();
-	// 	}, 2000);
-	// }
+	
 	
 
 	designForm.addEventListener("submit", function(e) {
@@ -143,27 +138,27 @@ let formDataDF = new FormData(designForm);
 
 	
 	function allowRusWords(){
-		console.log('typing name');
+	
 		let regexp = /[^А-ЯЁ\s][^\s]/igm;
 		this.value = this.value.replace(regexp, '');
 	}
 	function allowRusSentences(){
-		console.log('typing comment');
+		
 		let regexp = /[^А-ЯЁ\s,\.!?][^\s]/igm;
 		this.value = this.value.replace(regexp, '');
 	}
 	function allowEmail(){
-		console.log('typing email');
+		
 		let regexp = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,3})$/;
 		
 		if(this.value.match(regexp)){
 			return true;
 		} else {
-			alert('Неверный email');
+			
 			let mes = document.createElement('div');
 			mes.innerHTML = 'Неверный email';
 			popupDesignOverlay.appendChild(mes);
-			//this.value = '';
+			
 			return false;
 
 		}

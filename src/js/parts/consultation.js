@@ -1,7 +1,7 @@
 function consultation(){
 	console.log('consultation');
 	let giftModal = document.querySelector('.popup-gift'),
-	//form = document.querySelector('.form'),
+	
 	consForm = document.getElementById('consForm'),//form consultation
 	allInputs = consForm.elements,
 	nameConsForm = document.getElementById('nameConsForm'),
@@ -9,8 +9,7 @@ function consultation(){
 	popupDesignOverlay = document.querySelector('.popup-design'),//overlay
 	btnsPopupClose     = document.querySelectorAll('.popup-close'),
 	popupConsultation = document.querySelector('.popup-consultation');//overlay
-	// popupOk    = document.querySelector('.popup-ok'),
-	// popupError = document.querySelector('.popup-error');
+	
 	document.body.addEventListener('click', e => {
 		if (e.target.tagName == 'BUTTON' && e.target.classList.contains('button-consultation')) {
 			console.log(e.target);

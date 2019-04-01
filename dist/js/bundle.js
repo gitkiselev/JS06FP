@@ -291,12 +291,7 @@ function calc() {
   var message = new Object();
   message.loading = "Загрузка...";
   message.success = "Спасибо! Скоро мы с вами свяжемся";
-  message.failure = "Недостаточно данных"; // function submitMessage(text){
-  // 	statusDiv.innerHTML = text;
-  // 	setTimeout(function(){
-  // 		statusDiv.remove();
-  // 	}, 5000);
-  // }
+  message.failure = "Недостаточно данных";
 
   var clearInputs = function clearInputs() {
     for (var i = 0; i < allInputs.length; i++) {
@@ -317,50 +312,16 @@ function calc() {
       divc.innerHTML = 'Спасибо! Скоро мы с вами свяжемся!';
       setTimeout(function () {
         divc.remove();
-      }, 5000); //	submitMessage(message.success);
-
+      }, 5000);
       clearInputs();
     } else {
       divc.innerHTML = 'Недостаточно данных!';
       setTimeout(function () {
         divc.remove();
       }, 5000);
-      clearInputs(); //submitMessage(message.failure);
+      clearInputs();
     }
-  }); // let calculatorForm = document.getElementById('calcForm');
-  // let allInputs = calculatorForm.elements;
-  // calculatorForm.addEventListener("submit", function(e) {
-  // 	e.preventDefault();
-  // 	let statusMessage = document.createElement("div");
-  // 	statusMessage.classList.add("status");
-  // 	mainForm.appendChild(statusMessage);
-  // 	let calcFormData = new FormData(calcForm);
-  // 	let request = new XMLHttpRequest();
-  // 	request.open("POST", "./server.php");
-  // 	request.setRequestHeader(
-  // 			"Content-Type",
-  // 			"application/x-www-form-urlencoded"
-  // 	);
-  // 	request.send(calcFormData);
-  // 	let div = document.createElement('div');
-  // 	div.classList.add('status');
-  // 	let statusDiv = document.getElementsByClassName('status')[0];
-  // 	statusDiv.style.textAlign = 'center';
-  // 	function submitMessage(text){
-  // 		statusDiv.innerHTML = text;
-  // 		setTimeout(function(){
-  // 			statusDiv.remove();
-  // 		}, 5000);
-  // 	}
-  // 	request.onreadystatechange = function() {
-  // 			if (request.status === 200 && request.status < 300) {
-  // 							submitMessage(message.success);
-  // 					} else {
-  // 						submitMessage(message.failure);
-  // 					}
-  // 	};
-  // 	clearInputs();
-  // });
+  });
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (calc);
@@ -379,8 +340,7 @@ __webpack_require__.r(__webpack_exports__);
 function consultation() {
   console.log('consultation');
   var giftModal = document.querySelector('.popup-gift'),
-      //form = document.querySelector('.form'),
-  consForm = document.getElementById('consForm'),
+      consForm = document.getElementById('consForm'),
       //form consultation
   allInputs = consForm.elements,
       nameConsForm = document.getElementById('nameConsForm'),
@@ -389,8 +349,6 @@ function consultation() {
       //overlay
   btnsPopupClose = document.querySelectorAll('.popup-close'),
       popupConsultation = document.querySelector('.popup-consultation'); //overlay
-  // popupOk    = document.querySelector('.popup-ok'),
-  // popupError = document.querySelector('.popup-error');
 
   document.body.addEventListener('click', function (e) {
     if (e.target.tagName == 'BUTTON' && e.target.classList.contains('button-consultation')) {
@@ -542,8 +500,6 @@ function design() {
   popupDesignOverlay.addEventListener('click', hidePopupModal); //Функции закрытия модальных окон
 
   function hidePopupModal(e) {
-    console.log('modal design closed');
-
     if (e.target.classList.contains('popup-close') || e.target.classList.contains('popup-design')) {
       popupDesignOverlay.style.display = 'none';
       document.body.style.overflow = '';
@@ -608,15 +564,8 @@ function design() {
   message.success = "Спасибо! Скоро мы с вами свяжемся";
   message.failure = "Недостаточно данных";
   var divDesign = document.createElement('div');
-  divDesign.classList.add('status1'); //let divCons = document.getElementsByClassName('status1')[0];
-
-  divDesign.style.textAlign = 'center'; // function submitMessage(text){
-  // 	divDesign.innerHTML = text;
-  // 	setTimeout(function(){
-  // 		divDesign.remove();
-  // 	}, 2000);
-  // }
-
+  divDesign.classList.add('status1');
+  divDesign.style.textAlign = 'center';
   designForm.addEventListener("submit", function (e) {
     e.preventDefault();
     var formDataDF = new FormData(designForm);
@@ -655,29 +604,24 @@ function design() {
   });
 
   function allowRusWords() {
-    console.log('typing name');
     var regexp = /[^А-ЯЁ\s][^\s]/igm;
     this.value = this.value.replace(regexp, '');
   }
 
   function allowRusSentences() {
-    console.log('typing comment');
     var regexp = /[^А-ЯЁ\s,\.!?][^\s]/igm;
     this.value = this.value.replace(regexp, '');
   }
 
   function allowEmail() {
-    console.log('typing email');
     var regexp = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,3})$/;
 
     if (this.value.match(regexp)) {
       return true;
     } else {
-      alert('Неверный email');
       var mes = document.createElement('div');
       mes.innerHTML = 'Неверный email';
-      popupDesignOverlay.appendChild(mes); //this.value = '';
-
+      popupDesignOverlay.appendChild(mes);
       return false;
     }
   }
@@ -736,8 +680,7 @@ function expansion() {
 
   function showHiddenBlocksFunc() {
     for (var i = 0; i < showHiddenBlocks.length; i++) {
-      var showHiddenBlock = showHiddenBlocks[i]; //showHiddenBlock.classList.toggle('hidden-lg', 'hidden-md', 'hidden-sm', 'hidden-xs', 'col-sm-3', 'col-sm-offset-0', 'col-xs-10', 'col-xs-offset-1');
-
+      var showHiddenBlock = showHiddenBlocks[i];
       showHiddenBlock.classList.toggle('hidden-lg');
       showHiddenBlock.classList.toggle('hidden-md');
       showHiddenBlock.classList.toggle('hidden-sm');
@@ -1002,14 +945,10 @@ function gift() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 function hover() {
-  console.log('hover'); //let sizesBlock = document.querySelectorAll('.sizes-block');
-
-  var sw = document.querySelector('.sizes-wrapper'); //общий контейнер
-  //let imgs = sw.querySelectorAll('img');
-
+  console.log('hover');
+  var sw = document.querySelector('.sizes-wrapper');
   sw.addEventListener('mouseover', showImages);
-  sw.addEventListener('mouseout', hideImages); //sw.addEventListener('tap', showImages);
-
+  sw.addEventListener('mouseout', hideImages);
   sw.addEventListener('tap', hideImagesM);
 
   function showImages(e) {
@@ -1039,33 +978,9 @@ function hover() {
       e.target.style.zIndex = '';
       e.target.src = e.target.src.replace('-1.png', '.png');
     }
-  } //tap out img
-  // window.addEventListener('tap', function(e){
-  // 	isShown = false;
-  // 	let sizesBlocks = document.querySelectorAll('.sizes');
-  // 	let sizesImages = sizesBlocks.querySelectorAll('img');
-  // 	for(let i = 0; i < sizesImages.length; i++){
-  // 		let img = sizesImages[i];
-  // 		if(e.target.tagName == img){
-  // 			showImages();
-  // 			isShown = true;
-  // 		}
-  // 	}
-  // });
+  }
 
-
-  var sizesImages = sw.querySelectorAll('img'); // 	let  toggle = false;
-  // function chngimg() {
-  // 	for(let i = 0; i < sizesImages.length; i++){
-  // 		//let img = sizesImages[i];
-  // 		if (toggle === true && sizesImages[i].src == 'img/sizes-' + [i + 1] + '-1.png') {
-  // 			sizesImages[i].src  = 'img/sizes-' + [i + 1] + '.png';
-  // 		} else {
-  // 			sizesImages[i].src = 'img/sizes-' + [i + 1] + '-1.png';
-  // 		}
-  // 		toggle = !toggle;
-  // 	}   
-  // }
+  var sizesImages = sw.querySelectorAll('img');
 
   var _loop = function _loop(i) {
     var img = sizesImages[i];
@@ -1103,9 +1018,10 @@ function menu() {
   var mobileMenu = document.querySelector('.burger');
   var textMenu = mobileMenu.querySelector('span');
   var desktopMenu = document.querySelector('.header-menu');
-  var burgerList = document.querySelector('.burger-menu');
-  var width = document.body.clientWidth;
-  window.addEventListener('load', toggleMenu);
+  var burgerList = document.querySelector('.burger-menu'); // Объявляем переменные, w - длина, h - высота
+
+  var width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : document.body.offsetWidth;
+  window.addEventListener('DOMContentLoaded', toggleMenu);
   window.addEventListener('resize', toggleMenu);
   mobileMenu.addEventListener('click', toggleOpening);
 
@@ -1120,17 +1036,16 @@ function menu() {
   }
 
   function toggleMenu() {
-    console.log('resizing...');
+    burgerList.style.display = 'none'; //при ресайзе скрою
 
-    if (width <= 1080) {
-      console.log('width equals: ' + width);
+    if (width <= 1080 && mobileMenu.style.display == 'none' && desktopMenu.style.display == 'block') {
       mobileMenu.style.display = 'block';
       desktopMenu.style.display = 'none';
       textMenu.style.display = 'none';
-    } else if (width > 1080) {
+    } else if (width > 1080 && desktopMenu.style.display == 'none' && mobileMenu.style.display == 'block' && textMenu.style.dispaly == 'none') {
       desktopMenu.style.display = 'block';
       burgerList.style.display = 'none';
-      mobileMenu.style.display = 'none';
+      textMenu.style.display = 'none';
     }
   }
 }
@@ -1303,7 +1218,43 @@ if ('NodeList' in window && !NodeList.prototype.forEach) {
       callback.call(thisArg, this[i], i, this);
     }
   };
-}
+} // (function() {
+// 	var arr = [window.Element, window.CharacterData, window.DocumentType];
+// 	var args = [];
+// 	arr.forEach(function (item) {
+// 			if (item) {
+// 					args.push(item.prototype);
+// 			}
+// 	});
+// 	// from:https://github.com/jserz/js_piece/blob/master/DOM/ChildNode/remove()/remove().md
+// 	(function (arr) {
+// 			arr.forEach(function (item) {
+// 					if (item.hasOwnProperty('remove')) {
+// 							return;
+// 					}
+// 					Object.defineProperty(item, 'remove', {
+// 							configurable: true,
+// 							enumerable: true,
+// 							writable: true,
+// 							value: function remove() {
+// 									this.parentNode.removeChild(this);
+// 							}
+// 					});
+// 			});
+// 	})(args);
+// })();
+
+
+if (!('remove' in Element.prototype)) {
+  Element.prototype.remove = function () {
+    if (this.parentNode) {
+      this.parentNode.removeChild(this);
+    }
+  };
+} // Call remove() according to your need
+
+
+child.remove();
 
 /***/ })
 

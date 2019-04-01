@@ -74,15 +74,6 @@ function calc() {
 	message.success = "Спасибо! Скоро мы с вами свяжемся";
 	message.failure = "Недостаточно данных";
 
-	
-
-	// function submitMessage(text){
-	// 	statusDiv.innerHTML = text;
-	// 	setTimeout(function(){
-	// 		statusDiv.remove();
-	// 	}, 5000);
-	// }
-
 	let clearInputs = () => {
 		for (let i = 0; i < allInputs.length; i++) {
 			let input = allInputs[i];
@@ -104,7 +95,7 @@ function calc() {
 			setTimeout(function(){
 				divc.remove();
 			}, 5000);
-		//	submitMessage(message.success);
+		
 			clearInputs();
 		} else {
 		
@@ -113,49 +104,10 @@ function calc() {
 				divc.remove();
 			}, 5000);
 			clearInputs();
-			//submitMessage(message.failure);
+			
 		}
 	});
 
-	// let calculatorForm = document.getElementById('calcForm');
-	// let allInputs = calculatorForm.elements;
-	// calculatorForm.addEventListener("submit", function(e) {
-	// 	e.preventDefault();
-		
-	// 	let statusMessage = document.createElement("div");
-	// 	statusMessage.classList.add("status");
-	// 	mainForm.appendChild(statusMessage);
-	
-	// 	let calcFormData = new FormData(calcForm);
-	// 	let request = new XMLHttpRequest();
-	// 	request.open("POST", "./server.php");
-	// 	request.setRequestHeader(
-	// 			"Content-Type",
-	// 			"application/x-www-form-urlencoded"
-	// 	);
-	// 	request.send(calcFormData);
-		
-	// 	let div = document.createElement('div');
-	// 	div.classList.add('status');
-	// 	let statusDiv = document.getElementsByClassName('status')[0];
-	// 	statusDiv.style.textAlign = 'center';
-	// 	function submitMessage(text){
-	// 		statusDiv.innerHTML = text;
-	// 		setTimeout(function(){
-	// 			statusDiv.remove();
-	// 		}, 5000);
-			
-	// 	}
-	// 	request.onreadystatechange = function() {
-			
-	// 			if (request.status === 200 && request.status < 300) {
-	// 							submitMessage(message.success);
-	// 					} else {
-	// 						submitMessage(message.failure);
-	// 					}
-	// 	};
-	// 	clearInputs();
-	// });
 }
 
 export default calc;

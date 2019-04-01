@@ -5,7 +5,6 @@ function expansion(){
 		function showHiddenBlocksFunc(){
 			for(let i = 0; i < showHiddenBlocks.length; i++){
 				let showHiddenBlock = showHiddenBlocks[i];
-				//showHiddenBlock.classList.toggle('hidden-lg', 'hidden-md', 'hidden-sm', 'hidden-xs', 'col-sm-3', 'col-sm-offset-0', 'col-xs-10', 'col-xs-offset-1');
 				showHiddenBlock.classList.toggle('hidden-lg');
 				showHiddenBlock.classList.toggle('hidden-md');
 				showHiddenBlock.classList.toggle('hidden-sm');

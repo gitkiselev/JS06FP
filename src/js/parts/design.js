@@ -1,32 +1,32 @@
 function design(){
 	console.log('design');
+
 	document.body.addEventListener('click', e => {
 		if (e.target.tagName == 'BUTTON' && e.target.classList.contains('button-design')) {
 			console.log(e.target);
 			showPopupDesign();
 		}
 	});
-	let btnsPopupClose     = document.querySelectorAll('.popup-close'),
-	    popupDesignOverlay = document.querySelector('.popup-design');
-	
-    
-    
-	//closing popup by clicking on overlay
-	popupDesignOverlay.addEventListener('click', hidePopupModal);
-	
 
+
+	let btnsPopupClose     = document.querySelectorAll('.popup-close'),
+					popupDesignOverlay = document.querySelector('.popup-design');
+					
 	//Функции закрытия модальных окон
 	function hidePopupModal(e){
 		
 		if(e.target.classList.contains('popup-close') || e.target.classList.contains('popup-design')){
 			popupDesignOverlay.style.display = 'none';
 			document.body.style.overflow = '';
-			
 		}	
-		
 	}
-
-	//closing by clicking on the button "X"
+    
+    
+	//closing popup by clicking on overlay
+	popupDesignOverlay.addEventListener('click', hidePopupModal);
+	
+	
+//closing by clicking on the button "X"
 	for(let i = 0; i < btnsPopupClose.length; i++){
 		let btnPopupClose = btnsPopupClose[i];
 		btnPopupClose.addEventListener('click', hidePopupModal);
@@ -35,7 +35,7 @@ function design(){
 
 
 
-	
+
 	function showPopupDesign(){
 		let popupsDialog = document.querySelectorAll('.popup-dialog');
 		for(let i = 0; i < popupsDialog.length; i++){

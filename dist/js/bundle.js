@@ -494,17 +494,17 @@ function design() {
     }
   });
   var btnsPopupClose = document.querySelectorAll('.popup-close'),
-      popupDesignOverlay = document.querySelector('.popup-design'); //closing popup by clicking on overlay
-
-  popupDesignOverlay.addEventListener('click', hidePopupModal); //Функции закрытия модальных окон
+      popupDesignOverlay = document.querySelector('.popup-design'); //Функции закрытия модальных окон
 
   function hidePopupModal(e) {
     if (e.target.classList.contains('popup-close') || e.target.classList.contains('popup-design')) {
       popupDesignOverlay.style.display = 'none';
       document.body.style.overflow = '';
     }
-  } //closing by clicking on the button "X"
+  } //closing popup by clicking on overlay
 
+
+  popupDesignOverlay.addEventListener('click', hidePopupModal); //closing by clicking on the button "X"
 
   for (var i = 0; i < btnsPopupClose.length; i++) {
     var btnPopupClose = btnsPopupClose[i];

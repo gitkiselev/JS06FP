@@ -61,10 +61,6 @@ function mask() {
 		i < matrix.length && matrix != this.defaultValue ? i++ : i = matrix.indexOf("_");
 		setCursorPosition(i, this)
 }
-let message = new Object();
-	message.loading = "Загрузка...";
-	message.success = "Спасибо! Скоро мы с вами свяжемся";
-	message.failure = "Недостаточно данных";
 
 	
  mainForm.addEventListener("submit", function(e) {
@@ -72,7 +68,7 @@ let message = new Object();
 	
 	let statusMessage = document.createElement("div");
 	statusMessage.classList.add("status");
-	mainForm.appendChild(statusMessage);
+	mainForm.appendChild(statusMessage);//
 
  let formDataMainForm = new FormData(mainForm);
 	let request = new XMLHttpRequest();
@@ -81,7 +77,7 @@ let message = new Object();
 			"Content-Type",
 			"application/x-www-form-urlencoded"
 	);
-	request.send(formDataMainForm);
+	request.send(formDataMainForm);//
 	let message = new Object();
 	message.loading = "Загрузка...";
 	message.success = "Спасибо! Скоро мы с вами свяжемся";
@@ -95,10 +91,13 @@ let message = new Object();
 		statusDiv.innerHTML = text;
 		setTimeout(function(){
 			statusDiv.remove();
-		}, 5000);
+		}, 3000);
 	}
 
 	
+
+
+
 	request.onreadystatechange = function() {
 		
 

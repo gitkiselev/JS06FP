@@ -2,15 +2,15 @@ function consultation(){
 	console.log('consultation');
 	let giftModal = document.querySelector('.popup-gift'),
 	//form = document.querySelector('.form'),
-	consForm = document.getElementById('consForm'),
+	consForm = document.getElementById('consForm'),//form consultation
 	allInputs = consForm.elements,
 	nameConsForm = document.getElementById('nameConsForm'),
 	phoneConsForm = document.getElementById('phoneConsForm'),
 	popupDesignOverlay = document.querySelector('.popup-design'),//overlay
 	btnsPopupClose     = document.querySelectorAll('.popup-close'),
-	popupConsultation = document.querySelector('.popup-consultation'),//overlay
-	popupOk    = document.querySelector('.popup-ok'),
-	popupError = document.querySelector('.popup-error');
+	popupConsultation = document.querySelector('.popup-consultation');//overlay
+	// popupOk    = document.querySelector('.popup-ok'),
+	// popupError = document.querySelector('.popup-error');
 	document.body.addEventListener('click', e => {
 		if (e.target.tagName == 'BUTTON' && e.target.classList.contains('button-consultation')) {
 			console.log(e.target);
@@ -90,41 +90,55 @@ function openModal() {
 	}
 }
 
-
-let message = new Object();
-	message.loading = "Загрузка...";
-	message.success = "Спасибо! Скоро мы с вами свяжемся";
-	message.failure = "Недостаточно данных";
-
+	
 
 
 
 	consForm.addEventListener("submit", function(e) {
 		e.preventDefault();
-		let statusMessageCons = document.createElement("div");
-statusMessageCons.classList.add("status");
+
 let formDataCons = new FormData(consForm);
-		
-		let request = new XMLHttpRequest();
+let request = new XMLHttpRequest();
 		request.open("POST", "./server.php");
 		request.setRequestHeader(
 				"Content-Type",
 				"application/x-www-form-urlencoded"
 		);
 		request.send(formDataCons);
-		
-		request.onreadystatechange = function() {
-			if (request.status === 200 && request.status < 300) {
-						popupConsultation.style.display = 'none';
-							popupOk.style.display = 'block';
-					} else {
-						popupConsultation.style.display = 'none';
-							popupError.style.display = 'block';
-					}
-	};
-		clearInputs(); 
+
+		let message = new Object();
+	message.loading = "Загрузка...";
+	message.success = "Спасибо! Скоро мы с вами свяжемся";
+	message.failure = "Недостаточно данных";
+
+
+
+		let div = document.createElement('div');
+	div.classList.add('status');
+	
+	div.style.textAlign = 'center';
+	consForm.appendChild(div);
+	function submitMessage(text){
+		div.innerHTML = text;
+		div.style.textAlign = 'center';
+		setTimeout(function(){
+			div.remove();
+			popupConsultation.style.display = 'none';
+			document.body.style.overflow = '';
+		}, 3000);
+	}
+	
+	request.onreadystatechange = function() {
+		if (request.status === 200 && request.status < 300) {
+						submitMessage(message.success);
+				} else {
+					submitMessage(message.failure);
+				}
+};
+clearInputs();
 });
 phoneConsForm.addEventListener("input", mask, false);
+
 nameConsForm.addEventListener('input', allowRusWords);
 }
 export default  consultation;

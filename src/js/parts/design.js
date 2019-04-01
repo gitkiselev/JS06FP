@@ -83,12 +83,23 @@ function design(){
 	message.success = "Спасибо! Скоро мы с вами свяжемся";
 	message.failure = "Недостаточно данных";
 
+
+	let divDesign = document.createElement('div');
+	divDesign.classList.add('status1');
+	//let divCons = document.getElementsByClassName('status1')[0];
+	divDesign.style.textAlign = 'center';
+
+	// function submitMessage(text){
+	// 	divDesign.innerHTML = text;
+	// 	setTimeout(function(){
+	// 		divDesign.remove();
+	// 	}, 2000);
+	// }
 	
 
 	designForm.addEventListener("submit", function(e) {
 			e.preventDefault();
-			let statusMessageDF = document.createElement("div");
-	statusMessageDF.classList.add("status");
+		
 let formDataDF = new FormData(designForm);
 			
 			let request = new XMLHttpRequest();
@@ -98,16 +109,34 @@ let formDataDF = new FormData(designForm);
 					"application/x-www-form-urlencoded"
 			);
 			request.send(formDataDF);
-			
-			request.onreadystatechange = function() {
-				if (request.status === 200 && request.status < 300) {
-							popupDesignOverlay.style.display = 'none';
-								popupOk.style.display = 'block';
-						} else {
-							popupDesignOverlay.style.display = 'none';
-								popupError.style.display = 'block';
-						}
-		};
+			let message = new Object();
+			message.loading = "Загрузка...";
+			message.success = "Спасибо! Скоро мы с вами свяжемся";
+			message.failure = "Недостаточно данных";
+			let div = document.createElement('div');
+	div.classList.add('status');
+	
+	div.style.textAlign = 'center';
+	designForm.appendChild(div);
+	function submitMessage(text){
+		div.innerHTML = text;
+		div.style.textAlign = 'center';
+		setTimeout(function(){
+			div.remove();
+			popupDesignOverlay.style.display = 'none';
+			document.body.style.overflow = '';
+		}, 3000);
+	}
+		
+		request.onreadystatechange = function() {
+		
+
+			if (request.status === 200 && request.status < 300) {
+							submitMessage(message.success);
+					} else {
+						submitMessage(message.failure);
+					}
+	};
 			clearInputs();
 	});
 	

@@ -381,16 +381,17 @@ function consultation() {
   var giftModal = document.querySelector('.popup-gift'),
       //form = document.querySelector('.form'),
   consForm = document.getElementById('consForm'),
-      allInputs = consForm.elements,
+      //form consultation
+  allInputs = consForm.elements,
       nameConsForm = document.getElementById('nameConsForm'),
       phoneConsForm = document.getElementById('phoneConsForm'),
       popupDesignOverlay = document.querySelector('.popup-design'),
       //overlay
   btnsPopupClose = document.querySelectorAll('.popup-close'),
-      popupConsultation = document.querySelector('.popup-consultation'),
-      //overlay
-  popupOk = document.querySelector('.popup-ok'),
-      popupError = document.querySelector('.popup-error');
+      popupConsultation = document.querySelector('.popup-consultation'); //overlay
+  // popupOk    = document.querySelector('.popup-ok'),
+  // popupError = document.querySelector('.popup-error');
+
   document.body.addEventListener('click', function (e) {
     if (e.target.tagName == 'BUTTON' && e.target.classList.contains('button-consultation')) {
       console.log(e.target);
@@ -474,27 +475,37 @@ function consultation() {
     }
   }
 
-  var message = new Object();
-  message.loading = "Загрузка...";
-  message.success = "Спасибо! Скоро мы с вами свяжемся";
-  message.failure = "Недостаточно данных";
   consForm.addEventListener("submit", function (e) {
     e.preventDefault();
-    var statusMessageCons = document.createElement("div");
-    statusMessageCons.classList.add("status");
     var formDataCons = new FormData(consForm);
     var request = new XMLHttpRequest();
     request.open("POST", "./server.php");
     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     request.send(formDataCons);
+    var message = new Object();
+    message.loading = "Загрузка...";
+    message.success = "Спасибо! Скоро мы с вами свяжемся";
+    message.failure = "Недостаточно данных";
+    var div = document.createElement('div');
+    div.classList.add('status');
+    div.style.textAlign = 'center';
+    consForm.appendChild(div);
+
+    function submitMessage(text) {
+      div.innerHTML = text;
+      div.style.textAlign = 'center';
+      setTimeout(function () {
+        div.remove();
+        popupConsultation.style.display = 'none';
+        document.body.style.overflow = '';
+      }, 3000);
+    }
 
     request.onreadystatechange = function () {
       if (request.status === 200 && request.status < 300) {
-        popupConsultation.style.display = 'none';
-        popupOk.style.display = 'block';
+        submitMessage(message.success);
       } else {
-        popupConsultation.style.display = 'none';
-        popupError.style.display = 'block';
+        submitMessage(message.failure);
       }
     };
 
@@ -596,23 +607,47 @@ function design() {
   message.loading = "Загрузка...";
   message.success = "Спасибо! Скоро мы с вами свяжемся";
   message.failure = "Недостаточно данных";
+  var divDesign = document.createElement('div');
+  divDesign.classList.add('status1'); //let divCons = document.getElementsByClassName('status1')[0];
+
+  divDesign.style.textAlign = 'center'; // function submitMessage(text){
+  // 	divDesign.innerHTML = text;
+  // 	setTimeout(function(){
+  // 		divDesign.remove();
+  // 	}, 2000);
+  // }
+
   designForm.addEventListener("submit", function (e) {
     e.preventDefault();
-    var statusMessageDF = document.createElement("div");
-    statusMessageDF.classList.add("status");
     var formDataDF = new FormData(designForm);
     var request = new XMLHttpRequest();
     request.open("POST", "./server.php");
     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     request.send(formDataDF);
+    var message = new Object();
+    message.loading = "Загрузка...";
+    message.success = "Спасибо! Скоро мы с вами свяжемся";
+    message.failure = "Недостаточно данных";
+    var div = document.createElement('div');
+    div.classList.add('status');
+    div.style.textAlign = 'center';
+    designForm.appendChild(div);
+
+    function submitMessage(text) {
+      div.innerHTML = text;
+      div.style.textAlign = 'center';
+      setTimeout(function () {
+        div.remove();
+        popupDesignOverlay.style.display = 'none';
+        document.body.style.overflow = '';
+      }, 3000);
+    }
 
     request.onreadystatechange = function () {
       if (request.status === 200 && request.status < 300) {
-        popupDesignOverlay.style.display = 'none';
-        popupOk.style.display = 'block';
+        submitMessage(message.success);
       } else {
-        popupDesignOverlay.style.display = 'none';
-        popupError.style.display = 'block';
+        submitMessage(message.failure);
       }
     };
 
@@ -848,20 +883,18 @@ function form() {
     setCursorPosition(i, this);
   }
 
-  var message = new Object();
-  message.loading = "Загрузка...";
-  message.success = "Спасибо! Скоро мы с вами свяжемся";
-  message.failure = "Недостаточно данных";
   mainForm.addEventListener("submit", function (e) {
     e.preventDefault();
     var statusMessage = document.createElement("div");
     statusMessage.classList.add("status");
-    mainForm.appendChild(statusMessage);
+    mainForm.appendChild(statusMessage); //
+
     var formDataMainForm = new FormData(mainForm);
     var request = new XMLHttpRequest();
     request.open("POST", "./server.php");
     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    request.send(formDataMainForm);
+    request.send(formDataMainForm); //
+
     var message = new Object();
     message.loading = "Загрузка...";
     message.success = "Спасибо! Скоро мы с вами свяжемся";
@@ -875,7 +908,7 @@ function form() {
       statusDiv.innerHTML = text;
       setTimeout(function () {
         statusDiv.remove();
-      }, 5000);
+      }, 3000);
     }
 
     request.onreadystatechange = function () {

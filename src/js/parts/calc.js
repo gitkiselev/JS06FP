@@ -2,7 +2,7 @@ function calc() {
 
 	let selectSize = document.getElementById('size'),
 					calcForm = document.querySelector('#calcForm'),
-					//allInputs = calcForm.elements,
+					allInputs = calcForm.elements,
 					//calcSubmitBtn = calcForm.querySelector('button'),
 					calcBtn = document.getElementById('calcBtn'),
 					selectMaterial = document.getElementById('material'),
@@ -76,20 +76,21 @@ function calc() {
 
 	
 
-	function submitMessage(text){
-		statusDiv.innerHTML = text;
-		setTimeout(function(){
-			statusDiv.remove();
-		}, 5000);
-	}
+	// function submitMessage(text){
+	// 	statusDiv.innerHTML = text;
+	// 	setTimeout(function(){
+	// 		statusDiv.remove();
+	// 	}, 5000);
+	// }
 
 	let clearInputs = () => {
-		// for (let i = 0; i < allInputs.length; i++) {
-		// 	let input = allInputs[i];
-		// 	input.value = '';
-		// 	totalValue.innerHTML = 'Для расчета нужно выбрать размер картины и материал картины';
-		// }
-		//calcForm.reset();
+		for (let i = 0; i < allInputs.length; i++) {
+			let input = allInputs[i];
+			input.value = '';
+		 selectOptions.value = "1";
+			totalValue.innerHTML = 'Для расчета нужно выбрать размер картины и материал картины';
+		}
+		
 	}
 	
 	calcBtn.addEventListener('click', function(e){
@@ -111,6 +112,7 @@ function calc() {
 			setTimeout(function(){
 				divc.remove();
 			}, 5000);
+			clearInputs();
 			//submitMessage(message.failure);
 		}
 	});

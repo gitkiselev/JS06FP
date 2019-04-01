@@ -228,8 +228,8 @@ __webpack_require__.r(__webpack_exports__);
 function calc() {
   var selectSize = document.getElementById('size'),
       calcForm = document.querySelector('#calcForm'),
-      //allInputs = calcForm.elements,
-  //calcSubmitBtn = calcForm.querySelector('button'),
+      allInputs = calcForm.elements,
+      //calcSubmitBtn = calcForm.querySelector('button'),
   calcBtn = document.getElementById('calcBtn'),
       selectMaterial = document.getElementById('material'),
       selectOptions = document.getElementById('options'),
@@ -291,21 +291,20 @@ function calc() {
   var message = new Object();
   message.loading = "Загрузка...";
   message.success = "Спасибо! Скоро мы с вами свяжемся";
-  message.failure = "Недостаточно данных";
+  message.failure = "Недостаточно данных"; // function submitMessage(text){
+  // 	statusDiv.innerHTML = text;
+  // 	setTimeout(function(){
+  // 		statusDiv.remove();
+  // 	}, 5000);
+  // }
 
-  function submitMessage(text) {
-    statusDiv.innerHTML = text;
-    setTimeout(function () {
-      statusDiv.remove();
-    }, 5000);
-  }
-
-  var clearInputs = function clearInputs() {// for (let i = 0; i < allInputs.length; i++) {
-    // 	let input = allInputs[i];
-    // 	input.value = '';
-    // 	totalValue.innerHTML = 'Для расчета нужно выбрать размер картины и материал картины';
-    // }
-    //calcForm.reset();
+  var clearInputs = function clearInputs() {
+    for (var i = 0; i < allInputs.length; i++) {
+      var input = allInputs[i];
+      input.value = '';
+      selectOptions.value = "1";
+      totalValue.innerHTML = 'Для расчета нужно выбрать размер картины и материал картины';
+    }
   };
 
   calcBtn.addEventListener('click', function (e) {
@@ -325,7 +324,8 @@ function calc() {
       divc.innerHTML = 'Недостаточно данных!';
       setTimeout(function () {
         divc.remove();
-      }, 5000); //submitMessage(message.failure);
+      }, 5000);
+      clearInputs(); //submitMessage(message.failure);
     }
   }); // let calculatorForm = document.getElementById('calcForm');
   // let allInputs = calculatorForm.elements;

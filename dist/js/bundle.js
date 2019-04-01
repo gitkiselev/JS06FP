@@ -1252,9 +1252,7 @@ if (!('remove' in Element.prototype)) {
     }
   };
 } // Call remove() according to your need
-
-
-child.remove();
+//child.remove();
 
 /***/ })
 

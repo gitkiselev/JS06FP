@@ -3,7 +3,7 @@ function calc() {
 	let selectSize = document.getElementById('size'),
 					calcForm = document.querySelector('#calcForm'),
 					allInputs = calcForm.elements,
-					//calcSubmitBtn = calcForm.querySelector('button'),
+					
 					calcBtn = document.getElementById('calcBtn'),
 					selectMaterial = document.getElementById('material'),
 					selectOptions = document.getElementById('options'),

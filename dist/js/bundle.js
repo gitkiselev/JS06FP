@@ -229,8 +229,7 @@ function calc() {
   var selectSize = document.getElementById('size'),
       calcForm = document.querySelector('#calcForm'),
       allInputs = calcForm.elements,
-      //calcSubmitBtn = calcForm.querySelector('button'),
-  calcBtn = document.getElementById('calcBtn'),
+      calcBtn = document.getElementById('calcBtn'),
       selectMaterial = document.getElementById('material'),
       selectOptions = document.getElementById('options'),
       promocode = document.getElementsByClassName('promocode')[0],
@@ -522,11 +521,11 @@ function design() {
 
     popupDesignOverlay.style.display = 'block';
     document.body.style.overflow = 'hidden';
-  }
+  } //let popupOk    = document.querySelector('.popup-ok'),
+  //popupError = document.querySelector('.popup-error'),
 
-  var popupOk = document.querySelector('.popup-ok'),
-      popupError = document.querySelector('.popup-error'),
-      nameDF = document.querySelector('#nameDF'),
+
+  var nameDF = document.querySelector('#nameDF'),
       commentDF = document.querySelector('#commentDF'),
       phoneDF = document.querySelector('.phoneDF'),
       emailDF = document.querySelector('#emailDF'),
@@ -538,25 +537,21 @@ function design() {
       var input = formDFInput[_i2];
       input.value = '';
     }
-  };
-
-  var hidePopupModalSuccess = function hidePopupModalSuccess(e) {
-    console.log('modal success closed');
-
-    if (e.target.classList.contains('popup-close') || e.target.classList.contains('popup-ok')) {
-      popupOk.style.display = 'none';
-      document.body.style.overflow = '';
-    }
-  };
-
-  var hidePopupModalError = function hidePopupModalError(e) {
-    console.log('modal error closed');
-
-    if (e.target.classList.contains('popup-close') || e.target.classList.contains('popup-error')) {
-      popupError.style.display = 'none';
-      document.body.style.overflow = '';
-    }
-  }; //Скрипт к форме дизайн портрета
+  }; // let hidePopupModalSuccess = e => {
+  // 	console.log('modal success closed');
+  // 	if(e.target.classList.contains('popup-close') || e.target.classList.contains('popup-ok')){
+  // 		popupOk.style.display = 'none';
+  // 		document.body.style.overflow = '';
+  // 	}	
+  // }
+  // let hidePopupModalError = e => {
+  // 	console.log('modal error closed');
+  // 	if(e.target.classList.contains('popup-close') || e.target.classList.contains('popup-error')){
+  // 		popupError.style.display = 'none';
+  // 		document.body.style.overflow = '';
+  // 	}	
+  // }
+  //Скрипт к форме дизайн портрета
 
 
   var message = new Object();
@@ -589,7 +584,7 @@ function design() {
         div.remove();
         popupDesignOverlay.style.display = 'none';
         document.body.style.overflow = '';
-      }, 3000);
+      }, 5000);
     }
 
     request.onreadystatechange = function () {
@@ -655,9 +650,8 @@ function design() {
   phoneDF.addEventListener("input", mask, false);
   nameDF.addEventListener('input', allowRusWords);
   commentDF.addEventListener('input', allowRusSentences);
-  emailDF.addEventListener('blur', allowEmail);
-  popupOk.addEventListener('click', hidePopupModalSuccess);
-  popupError.addEventListener('click', hidePopupModalError);
+  emailDF.addEventListener('blur', allowEmail); //popupOk.addEventListener('click', hidePopupModalSuccess);
+  //popupError.addEventListener('click', hidePopupModalError);
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (design);
@@ -952,8 +946,6 @@ function hover() {
   sw.addEventListener('tap', hideImagesM);
 
   function showImages(e) {
-    console.log('showImages function');
-
     if (e.target.tagName == 'IMG') {
       e.target.style.position = 'relative';
       e.target.style.zIndex = '10';
@@ -962,8 +954,6 @@ function hover() {
   }
 
   function hideImages(e) {
-    console.log('hideImages function');
-
     if (e.target.tagName == 'IMG') {
       e.target.style.position = '';
       e.target.style.zIndex = '';
@@ -973,31 +963,34 @@ function hover() {
 
   function hideImagesM(e) {
     if (e.target.tagName != 'IMG') {
-      console.log('tap not image');
       e.target.style.position = '';
       e.target.style.zIndex = '';
       e.target.src = e.target.src.replace('-1.png', '.png');
     }
   }
 
-  var sizesImages = sw.querySelectorAll('img');
-
-  var _loop = function _loop(i) {
-    var img = sizesImages[i];
-    img.addEventListener('click', function (e) {
-      console.log('click on image');
-
-      if (img.src == 'img/sizes-4.png') {
-        img.src = 'img/sizes-' + [i + 1] + '-1.png';
-      } else if (img.src == 'img/sizes-4-1.png') {
-        img.src = 'img/sizes-' + [i + 1] + '.png';
-      }
-    });
-  };
-
-  for (var i = 0; i < sizesImages.length; i++) {
-    _loop(i);
-  }
+  var sizesImages = sw.querySelectorAll('img'); // for(let i = 0; i < sizesImages.length; i++){
+  // 	let img = sizesImages[i];
+  // 	img.addEventListener('click', function(){
+  // 		console.log('event on image');
+  // 		if(img.src == 'img/sizes-4.png'){
+  // 			img.src = 'img/sizes-' + [i + 1] + '-1.png';
+  // 		} else if (img.src == 'img/sizes-4-1.png'){
+  // 			img.src = 'img/sizes-' + [i + 1] + '.png';
+  // 		}
+  // 	});
+  // }
+  // 	function chngimg4() {
+  // 		var img = document.getElementById('sz4');
+  // 		if (img.src.indexOf('img/sizes-4.png')!=-1) {
+  // 						img.src  = 'img/sizes-4-1.png';
+  // 		}
+  // 			else {
+  // 					img.src = 'img/sizes-4.png';
+  // 	}
+  // }
+  // let sz4 = document.getElementById('sz4');
+  // sz4.addEventListener('touchstart', chngimg4);
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (hover);
@@ -1015,11 +1008,10 @@ function hover() {
 __webpack_require__.r(__webpack_exports__);
 function menu() {
   console.log('menu');
-  var mobileMenu = document.querySelector('.burger');
+  var mobileMenu = document.querySelectorAll('.burger')[0];
   var textMenu = mobileMenu.querySelector('span');
   var desktopMenu = document.querySelector('.header-menu');
-  var burgerList = document.querySelector('.burger-menu'); // Объявляем переменные, w - длина, h - высота
-
+  var burgerList = document.querySelector('.burger-menu');
   var width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : document.body.offsetWidth;
   window.addEventListener('DOMContentLoaded', toggleMenu);
   window.addEventListener('resize', toggleMenu);
@@ -1038,15 +1030,17 @@ function menu() {
   function toggleMenu() {
     burgerList.style.display = 'none'; //при ресайзе скрою
 
-    if (width <= 1080 && mobileMenu.style.display == 'none' && desktopMenu.style.display == 'block') {
+    if (width <= 1080 && mobileMenu.style.display == 'block' && desktopMenu.style.display == 'block') {
       mobileMenu.style.display = 'block';
       desktopMenu.style.display = 'none';
       textMenu.style.display = 'none';
-    } else if (width > 1080 && desktopMenu.style.display == 'none' && mobileMenu.style.display == 'block' && textMenu.style.dispaly == 'none') {
-      desktopMenu.style.display = 'block';
-      burgerList.style.display = 'none';
-      textMenu.style.display = 'none';
-    }
+    } else if (width > 1080 && desktopMenu.style.display == 'none' && mobileMenu.style.display == 'block'
+    /*&& textMenu.style.display == 'none'*/
+    ) {
+        desktopMenu.style.display = 'block'; //burgerList.style.display = 'none';
+
+        textMenu.style.display = 'none'; //mobileMenu.parentElement.classList.add('hidden-md');
+      }
   }
 }
 

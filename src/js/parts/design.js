@@ -21,7 +21,9 @@ function design(){
 		if(e.target.classList.contains('popup-close') || e.target.classList.contains('popup-design')){
 			popupDesignOverlay.style.display = 'none';
 			document.body.style.overflow = '';
-		}			
+			
+		}	
+		
 	}
 
 	//closing by clicking on the button "X"
@@ -30,20 +32,25 @@ function design(){
 		btnPopupClose.addEventListener('click', hidePopupModal);
 		
 	}
+
+
+
+	
 	function showPopupDesign(){
 		let popupsDialog = document.querySelectorAll('.popup-dialog');
 		for(let i = 0; i < popupsDialog.length; i++){
 			let popupDialog = popupsDialog[i];
 			popupDialog.style.display = 'block';
 		}
-		
 		popupDesignOverlay.style.display = 'block';
-		
 		document.body.style.overflow = 'hidden';
 	}
-	let popupOk    = document.querySelector('.popup-ok'),
-					popupError = document.querySelector('.popup-error'),
-					nameDF     = document.querySelector('#nameDF'),
+
+
+
+	//let popupOk    = document.querySelector('.popup-ok'),
+					//popupError = document.querySelector('.popup-error'),
+					let nameDF     = document.querySelector('#nameDF'),
      commentDF  = document.querySelector('#commentDF'),
      phoneDF    = document.querySelector('.phoneDF'),
 					emailDF    = document.querySelector('#emailDF'),
@@ -59,21 +66,24 @@ function design(){
 						}
 					}
 
-	let hidePopupModalSuccess = e => {
-		console.log('modal success closed');
-		if(e.target.classList.contains('popup-close') || e.target.classList.contains('popup-ok')){
-			popupOk.style.display = 'none';
-			document.body.style.overflow = '';
-		}	
-	}
+	// let hidePopupModalSuccess = e => {
+	// 	console.log('modal success closed');
+	// 	if(e.target.classList.contains('popup-close') || e.target.classList.contains('popup-ok')){
+	// 		popupOk.style.display = 'none';
+	// 		document.body.style.overflow = '';
+	// 	}	
+	// }
 
-	let hidePopupModalError = e => {
-		console.log('modal error closed');
-		if(e.target.classList.contains('popup-close') || e.target.classList.contains('popup-error')){
-			popupError.style.display = 'none';
-			document.body.style.overflow = '';
-		}	
-	}
+	// let hidePopupModalError = e => {
+	// 	console.log('modal error closed');
+	// 	if(e.target.classList.contains('popup-close') || e.target.classList.contains('popup-error')){
+	// 		popupError.style.display = 'none';
+	// 		document.body.style.overflow = '';
+	// 	}	
+	// }
+	
+	
+		
 	
 	
 					
@@ -116,11 +126,13 @@ let formDataDF = new FormData(designForm);
 	function submitMessage(text){
 		div.innerHTML = text;
 		div.style.textAlign = 'center';
+		
 		setTimeout(function(){
 			div.remove();
 			popupDesignOverlay.style.display = 'none';
 			document.body.style.overflow = '';
-		}, 3000);
+		}, 5000);
+		
 	}
 		
 		request.onreadystatechange = function() {
@@ -195,8 +207,8 @@ function mask() {
 	nameDF.addEventListener('input', allowRusWords);
 	commentDF.addEventListener('input', allowRusSentences);
 	emailDF.addEventListener('blur', allowEmail);
-	popupOk.addEventListener('click', hidePopupModalSuccess);
-	popupError.addEventListener('click', hidePopupModalError);
+	//popupOk.addEventListener('click', hidePopupModalSuccess);
+	//popupError.addEventListener('click', hidePopupModalError);
 }
 
 export default  design;

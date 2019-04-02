@@ -350,7 +350,6 @@ function consultation() {
 
   document.body.addEventListener('click', function (e) {
     if (e.target.tagName == 'BUTTON' && e.target.classList.contains('button-consultation')) {
-      console.log(e.target);
       showPopupConsultation();
     }
   });
@@ -363,7 +362,6 @@ function consultation() {
   };
 
   function allowRusWords() {
-    console.log('typing name');
     var regexp = /[^А-ЯЁ\s][^\s]/igm;
     this.value = this.value.replace(regexp, '');
   }
@@ -397,8 +395,6 @@ function consultation() {
   popupConsultation.addEventListener('click', hidePopupModalConsultation);
 
   function hidePopupModalConsultation(e) {
-    console.log('hide design or consultation');
-
     if (e.target.classList.contains('popup-consultation') || e.target.classList.contains('popup-close')) {
       popupConsultation.style.display = 'none';
       document.body.style.overflow = '';
@@ -518,9 +514,7 @@ function design() {
 
     popupDesignOverlay.style.display = "block";
     document.body.style.overflow = "hidden";
-  } //let popupOk    = document.querySelector('.popup-ok'),
-  //popupError = document.querySelector('.popup-error'),
-
+  }
 
   var nameDF = document.querySelector("#nameDF"),
       commentDF = document.querySelector("#commentDF"),
@@ -700,7 +694,6 @@ function filter() {
       }
 
       for (var _i = 0; _i < portfolioBlock.length; _i++) {
-        console.log(targetClass);
         portfolioBlock[_i].style.display = 'none';
 
         if (portfolioBlock[_i].classList.contains(targetClass)) {
@@ -749,19 +742,16 @@ function form() {
   };
 
   function allowRusWords() {
-    console.log('typing name');
     var regexp = /[^А-ЯЁ\s][^\s]/igm;
     this.value = this.value.replace(regexp, '');
   }
 
   function allowRusSentences() {
-    console.log('typing comment');
     var regexp = /[^А-ЯЁ\s,\.!?][^\s]/igm;
     this.value = this.value.replace(regexp, '');
   }
 
   function allowEmail() {
-    console.log('typing email');
     var regexp = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,3})$/;
 
     if (this.value.match(regexp)) {
@@ -892,7 +882,6 @@ function gift() {
 
   var scroll = function scroll() {
     if (isClicked === false && window.pageYOffset + window.innerHeight >= document.body.scrollHeight - 100) {
-      console.log('scrolled bottom');
       showGiftModal();
       isClicked = true;
     }
@@ -969,8 +958,6 @@ function menu() {
   mobileMenu.addEventListener('click', toggleOpening);
 
   function toggleOpening() {
-    console.log('click');
-
     if (burgerList.style.display == 'block') {
       burgerList.style.display = 'none';
     } else {
@@ -1149,8 +1136,6 @@ window.addEventListener('DOMContentLoaded', function () {
 });
 
 if ('NodeList' in window && !NodeList.prototype.forEach) {
-  console.info('polyfill for IE11');
-
   NodeList.prototype.forEach = function (callback, thisArg) {
     thisArg = thisArg || window;
 

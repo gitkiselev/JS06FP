@@ -57,7 +57,7 @@ function mask() {
 
 	popupConsultation.addEventListener('click', hidePopupModalConsultation);
 	function hidePopupModalConsultation(e) {
-		console.log('hide design or consultation');
+		
 		if(e.target.classList.contains('popup-consultation') || e.target.classList.contains('popup-close')){
 			popupConsultation.style.display = 'none';
 			document.body.style.overflow = '';

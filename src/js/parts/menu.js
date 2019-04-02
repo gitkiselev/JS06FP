@@ -12,7 +12,7 @@ function menu(){
 	mobileMenu.addEventListener('click', toggleOpening);
 
 	function toggleOpening(){
-		console.log('click');
+		
 		if (burgerList.style.display == 'block'){
 			burgerList.style.display = 'none';
 		} else {

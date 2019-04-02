@@ -13,17 +13,17 @@ function form(){
 		}
 	}
 	function allowRusWords(){
-		console.log('typing name');
+		
 		let regexp = /[^А-ЯЁ\s][^\s]/igm;
 		this.value = this.value.replace(regexp, '');
 	}
 	function allowRusSentences(){
-		console.log('typing comment');
+		
 		let regexp = /[^А-ЯЁ\s,\.!?][^\s]/igm;
 		this.value = this.value.replace(regexp, '');
 	}
 	function allowEmail(){
-		console.log('typing email');
+		
 		let regexp = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,3})$/;
 		
 		if(this.value.match(regexp)){

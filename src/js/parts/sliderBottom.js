@@ -1,5 +1,5 @@
 function sliderBottom(){
-	console.log('sliderBottom');
+	
 	let slideIndex1 = 1;
   let slides1   = document.getElementsByClassName('feedback-slider-item');
   let prev1     = document.querySelector('.main-prev-btn');

@@ -1,7 +1,5 @@
 function form(){
-	console.log('form');
-	//let popupOk    = document.querySelector('.popup-ok'),
-					//popupError = document.querySelector('.popup-error'),
+	
 	    let mainForm = document.getElementById('mainForm'),
 	    allInputs = mainForm.elements,
 	    nameMainForm = document.getElementById('nameMainForm'),

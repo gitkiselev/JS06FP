@@ -1,5 +1,5 @@
 function slider(){
-	console.log('slider');
+	
 	let slideIndex = 1;
 	let slides = document.getElementsByClassName('main-slider-item');
 	

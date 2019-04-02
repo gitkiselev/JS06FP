@@ -1,5 +1,5 @@
 function menu(){
-	console.log('menu');
+	
 	let mobileMenu = document.querySelectorAll('.burger')[0];
 	let textMenu = mobileMenu.querySelector('span');
 	let desktopMenu = document.querySelector('.header-menu');
@@ -33,13 +33,11 @@ function menu(){
 			textMenu.style.display = 'none';
 			
 				} else if (width > 1080 && desktopMenu.style.display == 'none' && mobileMenu.style.display == 'block'
-				 /*&& textMenu.style.display == 'none'*/){
+				 ){
 					
 					desktopMenu.style.display = 'block';
-					//burgerList.style.display = 'none';
-					textMenu.style.display = 'none';
-					//mobileMenu.parentElement.classList.add('hidden-md');
 					
+					textMenu.style.display = 'none';
 				}
 	}
 	

@@ -1,5 +1,5 @@
 function consultation(){
-	console.log('consultation');
+	
 	let giftModal = document.querySelector('.popup-gift'),
 	
 	consForm = document.getElementById('consForm'),//form consultation

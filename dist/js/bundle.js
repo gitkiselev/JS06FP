@@ -337,7 +337,6 @@ function calc() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 function consultation() {
-  console.log('consultation');
   var giftModal = document.querySelector('.popup-gift'),
       consForm = document.getElementById('consForm'),
       //form consultation
@@ -486,81 +485,65 @@ function consultation() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 function design() {
-  console.log('design');
-  document.body.addEventListener('click', function (e) {
-    if (e.target.tagName == 'BUTTON' && e.target.classList.contains('button-design')) {
-      console.log(e.target);
+  document.body.addEventListener("click", function (e) {
+    if (e.target.tagName == "BUTTON" && e.target.classList.contains("button-design")) {
       showPopupDesign();
     }
   });
-  var btnsPopupClose = document.querySelectorAll('.popup-close'),
-      popupDesignOverlay = document.querySelector('.popup-design'); //Функции закрытия модальных окон
+  var btnsPopupClose = document.querySelectorAll(".popup-close"),
+      popupDesignOverlay = document.querySelector(".popup-design"); //Функции закрытия модальных окон
 
   function hidePopupModal(e) {
-    if (e.target.classList.contains('popup-close') || e.target.classList.contains('popup-design')) {
-      popupDesignOverlay.style.display = 'none';
-      document.body.style.overflow = '';
+    if (e.target.classList.contains("popup-close") || e.target.classList.contains("popup-design")) {
+      popupDesignOverlay.style.display = "none";
+      document.body.style.overflow = "";
     }
   } //closing popup by clicking on overlay
 
 
-  popupDesignOverlay.addEventListener('click', hidePopupModal); //closing by clicking on the button "X"
+  popupDesignOverlay.addEventListener("click", hidePopupModal); //closing by clicking on the button "X"
 
   for (var i = 0; i < btnsPopupClose.length; i++) {
     var btnPopupClose = btnsPopupClose[i];
-    btnPopupClose.addEventListener('click', hidePopupModal);
+    btnPopupClose.addEventListener("click", hidePopupModal);
   }
 
   function showPopupDesign() {
-    var popupsDialog = document.querySelectorAll('.popup-dialog');
+    var popupsDialog = document.querySelectorAll(".popup-dialog");
 
     for (var _i = 0; _i < popupsDialog.length; _i++) {
       var popupDialog = popupsDialog[_i];
-      popupDialog.style.display = 'block';
+      popupDialog.style.display = "block";
     }
 
-    popupDesignOverlay.style.display = 'block';
-    document.body.style.overflow = 'hidden';
+    popupDesignOverlay.style.display = "block";
+    document.body.style.overflow = "hidden";
   } //let popupOk    = document.querySelector('.popup-ok'),
   //popupError = document.querySelector('.popup-error'),
 
 
-  var nameDF = document.querySelector('#nameDF'),
-      commentDF = document.querySelector('#commentDF'),
-      phoneDF = document.querySelector('.phoneDF'),
-      emailDF = document.querySelector('#emailDF'),
-      designForm = document.getElementById('myform'),
+  var nameDF = document.querySelector("#nameDF"),
+      commentDF = document.querySelector("#commentDF"),
+      phoneDF = document.querySelector(".phoneDF"),
+      emailDF = document.querySelector("#emailDF"),
+      designForm = document.getElementById("myform"),
       formDFInput = designForm.elements;
 
   var clearInputs = function clearInputs() {
     for (var _i2 = 0; _i2 < formDFInput.length; _i2++) {
       var input = formDFInput[_i2];
-      input.value = '';
+      input.value = "";
     }
-  }; // let hidePopupModalSuccess = e => {
-  // 	console.log('modal success closed');
-  // 	if(e.target.classList.contains('popup-close') || e.target.classList.contains('popup-ok')){
-  // 		popupOk.style.display = 'none';
-  // 		document.body.style.overflow = '';
-  // 	}	
-  // }
-  // let hidePopupModalError = e => {
-  // 	console.log('modal error closed');
-  // 	if(e.target.classList.contains('popup-close') || e.target.classList.contains('popup-error')){
-  // 		popupError.style.display = 'none';
-  // 		document.body.style.overflow = '';
-  // 	}	
-  // }
-  //Скрипт к форме дизайн портрета
+  }; //Скрипт к форме дизайн портрета
 
 
   var message = new Object();
   message.loading = "Загрузка...";
   message.success = "Спасибо! Скоро мы с вами свяжемся";
   message.failure = "Недостаточно данных";
-  var divDesign = document.createElement('div');
-  divDesign.classList.add('status1');
-  divDesign.style.textAlign = 'center';
+  var divDesign = document.createElement("div");
+  divDesign.classList.add("status1");
+  divDesign.style.textAlign = "center";
   designForm.addEventListener("submit", function (e) {
     e.preventDefault();
     var formDataDF = new FormData(designForm);
@@ -572,18 +555,18 @@ function design() {
     message.loading = "Загрузка...";
     message.success = "Спасибо! Скоро мы с вами свяжемся";
     message.failure = "Недостаточно данных";
-    var div = document.createElement('div');
-    div.classList.add('status');
-    div.style.textAlign = 'center';
+    var div = document.createElement("div");
+    div.classList.add("status");
+    div.style.textAlign = "center";
     designForm.appendChild(div);
 
     function submitMessage(text) {
       div.innerHTML = text;
-      div.style.textAlign = 'center';
+      div.style.textAlign = "center";
       setTimeout(function () {
         div.remove();
-        popupDesignOverlay.style.display = 'none';
-        document.body.style.overflow = '';
+        popupDesignOverlay.style.display = "none";
+        document.body.style.overflow = "";
       }, 5000);
     }
 
@@ -599,13 +582,13 @@ function design() {
   });
 
   function allowRusWords() {
-    var regexp = /[^А-ЯЁ\s][^\s]/igm;
-    this.value = this.value.replace(regexp, '');
+    var regexp = /[^А-ЯЁ\s][^\s]/gim;
+    this.value = this.value.replace(regexp, "");
   }
 
   function allowRusSentences() {
-    var regexp = /[^А-ЯЁ\s,\.!?][^\s]/igm;
-    this.value = this.value.replace(regexp, '');
+    var regexp = /[^А-ЯЁ\s,\.!?][^\s]/gim;
+    this.value = this.value.replace(regexp, "");
   }
 
   function allowEmail() {
@@ -614,8 +597,8 @@ function design() {
     if (this.value.match(regexp)) {
       return true;
     } else {
-      var mes = document.createElement('div');
-      mes.innerHTML = 'Неверный email';
+      var mes = document.createElement("div");
+      mes.innerHTML = "Неверный email";
       popupDesignOverlay.appendChild(mes);
       return false;
     }
@@ -648,10 +631,9 @@ function design() {
   }
 
   phoneDF.addEventListener("input", mask, false);
-  nameDF.addEventListener('input', allowRusWords);
-  commentDF.addEventListener('input', allowRusSentences);
-  emailDF.addEventListener('blur', allowEmail); //popupOk.addEventListener('click', hidePopupModalSuccess);
-  //popupError.addEventListener('click', hidePopupModalError);
+  nameDF.addEventListener("input", allowRusWords);
+  commentDF.addEventListener("input", allowRusSentences);
+  emailDF.addEventListener("blur", allowEmail);
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (design);
@@ -668,7 +650,6 @@ function design() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 function expansion() {
-  console.log('expansion');
   var moreBtn = document.querySelector('.button-styles');
   var showHiddenBlocks = document.querySelectorAll('.styles-2');
 
@@ -705,7 +686,6 @@ function expansion() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 function filter() {
-  console.log('filter');
   var portfolioMenu = document.querySelector('.portfolio-menu');
   var portfolioBlock = document.querySelectorAll('.portfolio-block');
   var noWorks = document.querySelector('.portfolio-no');
@@ -754,9 +734,6 @@ function filter() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 function form() {
-  console.log('form'); //let popupOk    = document.querySelector('.popup-ok'),
-  //popupError = document.querySelector('.popup-error'),
-
   var mainForm = document.getElementById('mainForm'),
       allInputs = mainForm.elements,
       nameMainForm = document.getElementById('nameMainForm'),
@@ -878,7 +855,6 @@ function form() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 function gift() {
-  console.log('gift');
   var giftModal = document.querySelector('.popup-gift'),
       closeGift = giftModal.querySelector('.popup-close'),
       popupGift = document.querySelector('.popup-gift'),
@@ -939,7 +915,6 @@ function gift() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 function hover() {
-  console.log('hover');
   var sw = document.querySelector('.sizes-wrapper');
   sw.addEventListener('mouseover', showImages);
   sw.addEventListener('mouseout', hideImages);
@@ -968,29 +943,6 @@ function hover() {
       e.target.src = e.target.src.replace('-1.png', '.png');
     }
   }
-
-  var sizesImages = sw.querySelectorAll('img'); // for(let i = 0; i < sizesImages.length; i++){
-  // 	let img = sizesImages[i];
-  // 	img.addEventListener('click', function(){
-  // 		console.log('event on image');
-  // 		if(img.src == 'img/sizes-4.png'){
-  // 			img.src = 'img/sizes-' + [i + 1] + '-1.png';
-  // 		} else if (img.src == 'img/sizes-4-1.png'){
-  // 			img.src = 'img/sizes-' + [i + 1] + '.png';
-  // 		}
-  // 	});
-  // }
-  // 	function chngimg4() {
-  // 		var img = document.getElementById('sz4');
-  // 		if (img.src.indexOf('img/sizes-4.png')!=-1) {
-  // 						img.src  = 'img/sizes-4-1.png';
-  // 		}
-  // 			else {
-  // 					img.src = 'img/sizes-4.png';
-  // 	}
-  // }
-  // let sz4 = document.getElementById('sz4');
-  // sz4.addEventListener('touchstart', chngimg4);
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (hover);
@@ -1007,7 +959,6 @@ function hover() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 function menu() {
-  console.log('menu');
   var mobileMenu = document.querySelectorAll('.burger')[0];
   var textMenu = mobileMenu.querySelector('span');
   var desktopMenu = document.querySelector('.header-menu');
@@ -1034,13 +985,10 @@ function menu() {
       mobileMenu.style.display = 'block';
       desktopMenu.style.display = 'none';
       textMenu.style.display = 'none';
-    } else if (width > 1080 && desktopMenu.style.display == 'none' && mobileMenu.style.display == 'block'
-    /*&& textMenu.style.display == 'none'*/
-    ) {
-        desktopMenu.style.display = 'block'; //burgerList.style.display = 'none';
-
-        textMenu.style.display = 'none'; //mobileMenu.parentElement.classList.add('hidden-md');
-      }
+    } else if (width > 1080 && desktopMenu.style.display == 'none' && mobileMenu.style.display == 'block') {
+      desktopMenu.style.display = 'block';
+      textMenu.style.display = 'none';
+    }
   }
 }
 
@@ -1058,7 +1006,6 @@ function menu() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 function slider() {
-  console.log('slider');
   var slideIndex = 1;
   var slides = document.getElementsByClassName('main-slider-item');
   setInterval(function () {
@@ -1101,7 +1048,6 @@ function slider() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 function sliderBottom() {
-  console.log('sliderBottom');
   var slideIndex1 = 1;
   var slides1 = document.getElementsByClassName('feedback-slider-item');
   var prev1 = document.querySelector('.main-prev-btn');
@@ -1212,32 +1158,7 @@ if ('NodeList' in window && !NodeList.prototype.forEach) {
       callback.call(thisArg, this[i], i, this);
     }
   };
-} // (function() {
-// 	var arr = [window.Element, window.CharacterData, window.DocumentType];
-// 	var args = [];
-// 	arr.forEach(function (item) {
-// 			if (item) {
-// 					args.push(item.prototype);
-// 			}
-// 	});
-// 	// from:https://github.com/jserz/js_piece/blob/master/DOM/ChildNode/remove()/remove().md
-// 	(function (arr) {
-// 			arr.forEach(function (item) {
-// 					if (item.hasOwnProperty('remove')) {
-// 							return;
-// 					}
-// 					Object.defineProperty(item, 'remove', {
-// 							configurable: true,
-// 							enumerable: true,
-// 							writable: true,
-// 							value: function remove() {
-// 									this.parentNode.removeChild(this);
-// 							}
-// 					});
-// 			});
-// 	})(args);
-// })();
-
+}
 
 if (!('remove' in Element.prototype)) {
   Element.prototype.remove = function () {
@@ -1245,8 +1166,7 @@ if (!('remove' in Element.prototype)) {
       this.parentNode.removeChild(this);
     }
   };
-} // Call remove() according to your need
-//child.remove();
+}
 
 /***/ })
 

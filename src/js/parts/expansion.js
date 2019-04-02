@@ -1,5 +1,5 @@
 function expansion(){
-	console.log('expansion');
+	
 	let moreBtn = document.querySelector('.button-styles');
 		let showHiddenBlocks = document.querySelectorAll('.styles-2');
 		function showHiddenBlocksFunc(){

@@ -1,5 +1,5 @@
 function gift(){
-	console.log('gift');
+	
 	let giftModal = document.querySelector('.popup-gift'),
 	closeGift = giftModal.querySelector('.popup-close'),
 	popupGift = document.querySelector('.popup-gift'),

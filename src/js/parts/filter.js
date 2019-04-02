@@ -1,5 +1,5 @@
 function filter(){
-	console.log('filter');
+	
 	let portfolioMenu = document.querySelector('.portfolio-menu');
 	let portfolioBlock = document.querySelectorAll('.portfolio-block');
 	let noWorks = document.querySelector('.portfolio-no');

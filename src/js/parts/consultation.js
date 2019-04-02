@@ -12,7 +12,7 @@ function consultation(){
 	
 	document.body.addEventListener('click', e => {
 		if (e.target.tagName == 'BUTTON' && e.target.classList.contains('button-consultation')) {
-			console.log(e.target);
+			
 			showPopupConsultation();
 		}
 	});
@@ -23,7 +23,7 @@ function consultation(){
 		}
 	}
 	function allowRusWords(){
-		console.log('typing name');
+		
 		let regexp = /[^А-ЯЁ\s][^\s]/igm;
 		this.value = this.value.replace(regexp, '');
 	}
@@ -71,9 +71,7 @@ function mask() {
 	}
 	function showPopupConsultation(){
 			popupConsultation.style.display = 'block';
-			
 			document.body.style.overflow = 'hidden';
-			
 	}
 	let timerId = setTimeout(() => {
 		openModal();

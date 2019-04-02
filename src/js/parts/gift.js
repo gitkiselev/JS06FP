@@ -36,7 +36,7 @@ popupGift.addEventListener('click', hidePopupGift);
 		
 		let scroll = () => {
 			if ((isClicked === false) && (window.pageYOffset + window.innerHeight >= document.body.scrollHeight - 100)) {
-				console.log('scrolled bottom');
+				
 				showGiftModal();
 				isClicked = true;
 			}

@@ -44,8 +44,7 @@ function design() {
 			document.body.style.overflow = "hidden";
 	}
 
-	//let popupOk    = document.querySelector('.popup-ok'),
-	//popupError = document.querySelector('.popup-error'),
+	
 	let nameDF = document.querySelector("#nameDF"),
 			commentDF = document.querySelector("#commentDF"),
 			phoneDF = document.querySelector(".phoneDF"),
